@@ -16,7 +16,8 @@
                 <app-paciente-modificar *ngIf="pacienteSeleccionado" [pacienteSeleccionado]="pacienteSeleccionado"
                     (salir)="togglePannel()" (modificar)="update($event)"></app-paciente-modificar>
             </div>
-            <app-paciente-alta *ngIf="panelCrearPacienteVisible" (salir)="togglePannel2()" (crear)="create($event)"></app-paciente-alta>
+            <app-paciente-alta *ngIf="panelCrearPacienteVisible" (salir)="togglePannel2()"
+                (crear)="create($event)"></app-paciente-alta>
         </div>
     </div>
 </div>

@@ -65,8 +65,8 @@ export const TurnoModel = {
 
     async create(data: TurnoInput): Promise<Turno> {
         const [result] = await pool.query<ResultSetHeader>(
-            'INSERT INTO turnos (horario, sala, razon, descripcion, id_paciente, id_doctor) VALUES (?, ?, ?, ?, ?, ?)',
-            [data.horario, data.sala, data.razon, data.descripcion, data.id_paciente, data.id_doctor]
+            'INSERT INTO turnos (horario, sala, razon, descripcion, estado, id_paciente, id_doctor) VALUES (?, ?, ?, ?, ?, ?, ?)',
+            [data.horario, data.sala, data.razon, data.descripcion, data.estado, data.id_paciente, data.id_doctor]
         );
         return { id: result.insertId, ...data };
     },

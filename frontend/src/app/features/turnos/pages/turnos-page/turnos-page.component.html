@@ -9,7 +9,7 @@
         </div>
         <div class="content__turnos-section">
             <div class="content__turnos" *ngIf="!panelModificarTurnoVisible && !panelCrearTurnoVisible">
-                <app-turno-card *ngFor="let t of turnos" [turno]="t" (modificar)="selectTurno($event)"></app-turno-card>
+                <app-turno-card *ngFor="let t of turnos" [turno]="t" (modificar)="selectTurno($event)" (eliminar)="remove($event)"></app-turno-card>
             </div>
             <div class="content__modify-turno" *ngIf="panelModificarTurnoVisible">
                 <app-turno-modificar *ngIf="turnoSeleccionado" [turnoSeleccionado]="turnoSeleccionado" (modificar)="update($event)" (salir)="togglePannel()"></app-turno-modificar>
