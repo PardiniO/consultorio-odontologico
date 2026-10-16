@@ -1,5 +1,5 @@
--- CREATE DATABASE IF NOT EXISTS consultorio;
--- USE consultorio;
+CREATE DATABASE IF NOT EXISTS consultorio;
+USE consultorio;
 
 CREATE TABLE pacientes(
         id_paciente INT PRIMARY KEY AUTO_INCREMENT,
