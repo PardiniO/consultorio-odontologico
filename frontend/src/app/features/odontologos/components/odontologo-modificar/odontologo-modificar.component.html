@@ -1,4 +1,3 @@
-<h2>Información sobre {{ doctorSeleccionado.nombre }} {{ doctorSeleccionado.apellido }} </h2>
 <div class="modify-form">
     <div class="modify-form__field-container">
         <label for="name">Nombre:</label>
@@ -16,7 +15,8 @@
         </select>
     </div>
     <div class="modify-form__buttons">
-        <button (click)="enviarModificacion()" [disabled]="doctorSeleccionado.nombre === '' || doctorSeleccionado.apellido === ''">Confirmar</button>
+        <button (click)="enviarModificacion()"
+            [disabled]="doctorSeleccionado.nombre === '' || doctorSeleccionado.apellido === ''">Modificar</button>
         <button (click)="cerrar()">Salir</button>
     </div>
 </div>

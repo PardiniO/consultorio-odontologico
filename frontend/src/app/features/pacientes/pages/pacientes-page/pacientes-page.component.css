@@ -1,4 +1,34 @@
-.patients {
+.content {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex-grow: 1;
+}
+
+.content__patients-manager {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    flex-grow: 1;
+    background-color: white;
+}
+
+.content__search-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    gap: 10px;
+    padding: 10px 0;
+    background-color: rgb(219, 218, 218);
+}
+
+.content__patients {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -8,8 +38,59 @@
     overflow: auto;
     overflow-x: hidden;
     width: 100%;
-    height: 90vh;
+    height: 79vh;
     gap: 15px;
-    padding: 10px 0;
+    padding: 20px 0;
+    flex-grow: 1;
     background-color: rgb(232, 232, 232);
+}
+
+.content__patients-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 79vh;
+    flex-grow: 1;
+}
+
+.create-btn {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: gray;
+}
+
+.create-btn:hover {
+    transform: scale(1.1);
+    box-shadow: none;
+    cursor: pointer;
+    color: rgb(87, 87, 87);
+}
+
+input, button {
+    padding: 10px;
+    border: 2px solid gray;
+    border-radius: 10px;
+    transition: all 0.25s;
+}
+
+input {
+    width: 25%;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 3px 0 0 gray;
+    cursor: pointer;
+}
+
+.content__modify-patients {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    height: 90vh;
 }

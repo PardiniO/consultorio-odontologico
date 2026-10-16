@@ -1,13 +1,8 @@
-<div class="turno-card">
-    <div class="turno-card__header">Turno a las {{ horario }} {{ estado }} </div>
+<div class="turno-card" (click)="modificarTurno()">
+    <div class="turno-card__header" [ngClass]="turno.estado"> {{ turno.horario | date: 'short' }} - {{ turno.estado }} </div>
     <div class="turno-card__body">
-        <p>Paciente: {{ paciente }} </p>
-        <p>Sala: {{ sala }}</p>
-        <p>Razón: {{ razon }}</p>
-        <p>Descripción: {{ descripcion }} </p>
-    </div>
-    <div class="turno-card__buttons">
-        <button (click)="modificarEstado('confirmado')">Confirmar</button>
-        <button (click)="modificarEstado('cancelado')">Cancelar</button>
+        <p>Sala: {{ turno.sala }}</p>
+        <p>Razón: {{ turno.razon }}</p>
+        <p>Descripción: {{ turno.descripcion }} </p>
     </div>
 </div>

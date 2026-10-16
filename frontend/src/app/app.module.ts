@@ -12,7 +12,7 @@ import { HeaderComponent } from './shared/components/header/header.component';
 import { NavComponent } from './shared/components/nav/nav.component';
 import { HomeComponent } from './features/home/components/home/home.component';
 import { HomePageComponent } from './features/home/pages/home-page/home-page.component';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterModule } from '@angular/router';
 import { OdontologoCardComponent } from './features/odontologos/components/odontologo-card/odontologo-card.component';
 import { OdontologoModificarComponent } from './features/odontologos/components/odontologo-modificar/odontologo-modificar.component';
 import { provideHttpClient } from '@angular/common/http';
@@ -20,6 +20,9 @@ import { PacienteCardComponent } from './features/pacientes/components/paciente-
 import { PacienteModificarComponent } from './features/pacientes/components/paciente-modificar/paciente-modificar.component';
 import { PacienteAltaComponent } from './features/pacientes/components/paciente-alta/paciente-alta.component';
 import { PacientesPageComponent } from './features/pacientes/pages/pacientes-page/pacientes-page.component';
+import { HomeButtonComponent } from './shared/components/home-button/home-button.component';
+import { TurnoAltaComponent } from './features/turnos/components/turno-alta/turno-alta.component';
+import { TurnoModificarComponent } from './features/turnos/components/turno-modificar/turno-modificar.component';
 
 @NgModule({
   declarations: [
@@ -37,13 +40,16 @@ import { PacientesPageComponent } from './features/pacientes/pages/pacientes-pag
     PacienteCardComponent,
     PacienteModificarComponent,
     PacienteAltaComponent,
-    PacientesPageComponent
+    PacientesPageComponent,
+    HomeButtonComponent,
+    TurnoAltaComponent,
+    TurnoModificarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    RouterLink
+    RouterModule
   ],
   providers: [provideHttpClient()],
   bootstrap: [AppComponent]

@@ -1,4 +1,4 @@
-.contenido {
+.content {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -7,17 +7,41 @@
     flex-grow: 1;
 }
 
-.barra-acciones {
+.content__turnos-manager {
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: center;
     align-items: center;
     text-align: center;
-    width: 20%;
+    width: 100%;
+    flex-grow: 1;
+    background-color: white;
+}
+
+.content__search-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    gap: 10px;
+    padding: 10px 0;
+    background-color: rgb(219, 218, 218);
+}
+
+.content__turnos-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    height: 79vh;
     flex-grow: 1;
 }
 
-.turnos {
+.content__turnos {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -26,11 +50,52 @@
     flex-wrap: wrap;
     overflow: auto;
     overflow-x: hidden;
-    width: 80%;
-    height: 90vh;
+    width: 100vw;
+    height: 79vh;
     padding: 10px 0;
     gap: 10px;
-    background: radial-gradient(rgba(205, 205, 205, 0.507), rgba(212, 212, 212, 0.638));
+    background: radial-gradient(rgba(226, 225, 225, 0.356), rgba(212, 212, 212, 0.638));
     border-top: 2px solid gray;
     border-bottom: 2px solid gray;
+}
+
+.content__modify-turno {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 90vh;
+    flex-grow: 1;
+}
+
+.create-btn {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: gray;
+}
+
+.create-btn:hover {
+    transform: scale(1.1);
+    box-shadow: none;
+    cursor: pointer;
+    color: rgb(87, 87, 87);
+}
+
+input, button {
+    padding: 10px;
+    border: 2px solid gray;
+    border-radius: 10px;
+    transition: all 0.25s;
+}
+
+input {
+    width: 25%;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 3px 0 0 gray;
+    cursor: pointer;
 }

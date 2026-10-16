@@ -24,7 +24,7 @@ export class PacientesService {
     // AGREGAR LOS METODOS NECESARIOS EN EL MODELO Y LOS CONTROLLERS DEL BACKEND
   }
 
-  create(paciente: Omit<Paciente, 'id'>): Observable<Paciente> {
+  create(paciente: Omit<Paciente, 'id_paciente'>): Observable<Paciente> {
     return this.http.post<Paciente>(this.apiUrl, paciente);
   }
 

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Turno } from '../../../../core/models/turno.interface';
 
 @Component({
@@ -7,14 +7,11 @@ import { Turno } from '../../../../core/models/turno.interface';
   styleUrl: './turno-card.component.css'
 })
 export class TurnoCardComponent {
-  @Input({required: true}) paciente!: string;
-  @Input({required: true}) horario!: string;
-  @Input({required: true}) sala!: string;
-  @Input({required: true}) razon!: string;
-  @Input({required: true}) descripcion!: string;
-  @Input({required: true}) estado!: string;
+  @Input({required: true}) turno!: Turno;
 
-  modificarEstado(nuevoEstado: Turno['estado']): void {
-    this.estado = nuevoEstado;
+  @Output() modificar = new EventEmitter<Turno>();
+
+  modificarTurno(): void {
+    this.modificar.emit(this.turno);
   }
 }

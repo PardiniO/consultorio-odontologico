@@ -1,0 +1,47 @@
+<div class="form">
+    <p>Alta de turno</p>
+    <div class="form__field">
+        <label for="horario" class="form__label">Horario:</label>
+        <input id="horario" type="datetime-local" class="form__input" [(ngModel)]="turno.horario">
+    </div>
+    <div class="form__field">
+        <label for="sala" class="form__label">Sala:</label>
+        <select id="sala" [(ngModel)]="turno.sala">
+            <option value="A17">A17</option>
+            <option value="A19">A19</option>
+        </select>
+    </div>
+    <div class="form__field">
+        <label for="razon">Razón:</label>
+        <input id="razon" class="input-date" type="text" [(ngModel)]="turno.razon">
+    </div>
+    <div class="form__field">
+        <label for="desc">Descripción:</label>
+        <input id="desc" class="input-date" type="text" [(ngModel)]="turno.descripcion">
+    </div>
+    <div class="form__field">
+        <label for="estado">Estado:</label>
+        <select id="estado" [(ngModel)]="turno.estado">
+            <option value="pendiente">Pendiente</option>
+            <option value="confirmado">Confirmado</option>
+            <option value="cancelado">Cancelado</option>
+        </select>
+    </div>
+    <div class="form__field">
+        <label for="pacientes">Pacientes:</label>
+        <select id="pacientes" [(ngModel)]="turno.id_paciente">
+            <option *ngFor="let p of pacientes" [value]="p.id_paciente"> {{ p.nombre }} {{ p.apellido }} </option>
+        </select>
+    </div>
+    <div class="form__field">
+        <label for="doctores">Doctores:</label>
+        <select id="doctores" [(ngModel)]="turno.id_doctor">
+            <option *ngFor="let d of doctores" [value]="d.id_doctor"> {{ d.nombre }} {{ d.apellido }} </option>
+        </select>
+    </div>
+    <div class="form__buttons">
+        <button class="form__button" (click)="create()"
+            [disabled]="turno.horario === '' || turno.razon === '' || turno.descripcion === ''">Confirmar</button>
+        <button class="form__button" (click)="salirDelMenuAlta()">Salir</button>
+    </div>
+</div>

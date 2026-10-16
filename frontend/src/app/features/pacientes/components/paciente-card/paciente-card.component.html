@@ -1,8 +1,9 @@
 <div class="patient-card">
     <div class="patient-card__header">
         <img class="img-1" src="paciente.png" [alt]="paciente.nombre">
+        <button class="delete-button" (click)="eliminarPaciente(paciente.id_paciente)">X</button>
     </div>
-    <div class="patient-card__body">
+    <div class="patient-card__body" (click)="modificarPaciente()">
         <p class="patient-card__body--name"> {{ paciente.nombre }} {{ paciente.apellido }} </p>
         <div class="patient-card__birth-date">
             <img class="img-2" src="nacimiento.png" [alt]="paciente.fecha_nacimiento">

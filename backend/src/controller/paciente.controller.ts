@@ -2,6 +2,7 @@ import type { Request, Response } from "express";
 import { PacienteModel, type PacienteInput } from "../models/paciente.model";
 
 type IdParams = { id: string };
+type NameParams = { name: string }
 
 function parseId(value: string): number | null {
     const id = Number(value);
@@ -28,6 +29,22 @@ export const getById = async (req: Request<IdParams>, res: Response) => {
     }
 
     const paciente = await PacienteModel.findById(id);
+    if (!paciente) {
+        res.status(404).json({ error: 'Paciente no encontrado' });
+        return;
+    }
+
+    res.json(paciente);
+};
+
+export const getByName = async (req: Request<NameParams>, res: Response) => {
+    const name = req.params.name;
+    if (!name) {
+        res.status(400).json({ error: 'Nombre inválido' });
+        return;
+    }
+
+    const paciente = await PacienteModel.findByName(name);
     if (!paciente) {
         res.status(404).json({ error: 'Paciente no encontrado' });
         return;

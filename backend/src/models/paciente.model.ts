@@ -36,6 +36,13 @@ export const PacienteModel = {
         return rows[0] ?? null;
     },
 
+    async findByName(name: string): Promise<Paciente | null> {
+        const [rows] = await pool.query<PacienteRow[]>(
+            'SELECT * FROM pacientes WHERE nombre = ?; ', [name]
+        );
+        return rows[0] ?? null;
+    },
+
     async create(data: PacienteInput): Promise<Paciente> {
         const [result] = await pool.query<ResultSetHeader>(
             'INSERT INTO pacientes(nombre, apellido, fecha_nacimiento) VALUES(?,?,?)',
@@ -54,7 +61,7 @@ export const PacienteModel = {
 
     async remove(id: number): Promise<boolean> {
         const [result] = await pool.query<ResultSetHeader>(
-            'DELETE FROM Pacientes WHERE id = ?',
+            'DELETE FROM Pacientes WHERE id_paciente = ?',
             [id]
         );
         return result.affectedRows > 0;

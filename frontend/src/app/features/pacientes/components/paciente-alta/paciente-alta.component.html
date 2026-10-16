@@ -1,1 +1,20 @@
-<p>paciente-alta works!</p>
+<div class="form">
+    <p>Alta de Paciente</p>
+    <div class="form__field">
+        <label for="nombre" class="form__label">Nombre:</label>
+        <input id="nombre" type="text" placeholder="Ej: Jhon" class="form__input" [(ngModel)]="paciente.nombre">
+    </div>
+    <div class="form__field">
+        <label for="apellido" class="form__label">Apellido:</label>
+        <input id="apellido" type="text" placeholder="Ej: Doe" class="form__input" [(ngModel)]="paciente.apellido">
+    </div>
+    <div class="form__field">
+        <label for="speciality">Fecha de nacimiento:</label>
+        <input class="input-date" type="date" [(ngModel)]="paciente.fecha_nacimiento">
+    </div>
+    <div class="form__buttons">
+        <button class="form__button" (click)="create()"
+            [disabled]="paciente.nombre === '' || paciente.apellido === ''">Confirmar</button>
+        <button class="form__button" (click)="salirDelPanelCrear()">Salir</button>
+    </div>
+</div>

@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { PacientesService } from '../../../../core/services/pacientes.service';
+import { Paciente } from '../../../../core/models/paciente.interface';
 
 @Component({
   selector: 'app-paciente-alta',
@@ -6,5 +8,20 @@ import { Component } from '@angular/core';
   styleUrl: './paciente-alta.component.css'
 })
 export class PacienteAltaComponent {
+  @Output() salir = new EventEmitter<void>();
+  @Output() crear = new EventEmitter<Omit<Paciente, 'id_paciente'>>();
 
+  paciente: Omit<Paciente, 'id_paciente'> = {
+    nombre: '',
+    apellido: '',
+    fecha_nacimiento: '2026-10-01'
+  };
+
+  create(): void {
+    this.crear.emit(this.paciente);
+  }
+
+  salirDelPanelCrear(): void {
+    this.salir.emit();
+  }
 }

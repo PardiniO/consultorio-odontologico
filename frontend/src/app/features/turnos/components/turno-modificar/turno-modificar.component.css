@@ -1,0 +1,56 @@
+.modify-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 25vw;
+    height: 50vh;
+    gap: 10px;
+    background-color: rgb(172, 171, 171);
+    border-radius: 10px;
+    border: 2px solid gray;
+}
+
+.modify-form__field-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    width: 75%;
+    gap: 10px;
+}
+
+.modify-form__buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 75%;
+    gap: 10px;
+    padding: 25px 0;
+}
+
+label {
+    font-size: 0.9rem;
+}
+
+input, button, select {
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid gray;
+    transition: all 0.25s;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 3px 0 0 gray;
+    cursor: pointer;
+}
+
+h2 {
+    color: gray;
+    margin-bottom: 10px;
+}

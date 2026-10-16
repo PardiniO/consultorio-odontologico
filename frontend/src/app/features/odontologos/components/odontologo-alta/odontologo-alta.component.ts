@@ -10,6 +10,10 @@ import { DoctoresService } from '../../../../core/services/doctores.service';
 export class OdontologoAltaComponent {
   private doctoresService = inject(DoctoresService);
 
+
+  @Output() crearDoctor = new EventEmitter<Omit<Doctor, 'id_doctor'>>();
+  @Output() salir = new EventEmitter<void>();
+
   doctor: Omit<Doctor, 'id_doctor'> = {
     nombre: '',
     apellido: '',
@@ -17,19 +21,11 @@ export class OdontologoAltaComponent {
     es_admin: false
   };
 
-  create(): void {
-    if (!this.doctor.nombre || !this.doctor.apellido) {
-      alert('Faltan campos');
-      return;
-    };
+  crear(): void {
+    this.crearDoctor.emit(this.doctor);
+  }
 
-    this.doctoresService.create(this.doctor).subscribe({
-      next: () => {
-        console.log(this.doctor);
-      },
-      error: (e) => {
-        console.error(e);
-      } 
-    });
+  salirDelMenuAlta(): void {
+    this.salir.emit();
   }
 }

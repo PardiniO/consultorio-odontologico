@@ -1,0 +1,33 @@
+<div class="modify-form">
+    <div class="modify-form__field-container">
+        <label for="name">Horario:</label>
+        <input id="name" type="datetime-local" placeholder="Ej: Jhon" [(ngModel)]="turnoSeleccionado.horario">
+    </div>
+    <div class="modify-form__field-container">
+        <label for="sala">Sala:</label>
+        <select id="sala" [(ngModel)]="turnoSeleccionado.sala">
+            <option value="A17">A17</option>
+            <option value="A19">A19</option>
+        </select>
+    </div>
+    <div class="modify-form__field-container">
+        <label for="razon">Razón:</label>
+        <input id="razon" type="text" placeholder="Ej: Fractura" [(ngModel)]="turnoSeleccionado.razon">
+    </div>
+    <div class="modify-form__field-container">
+        <label for="desc">Descripción:</label>
+        <input id="desc" type="text" placeholder="..." [(ngModel)]="turnoSeleccionado.descripcion">
+    </div>
+    <div class="modify-form__field-container">
+        <label for="estado">Estado:</label>
+        <select id="estado" [(ngModel)]="turnoSeleccionado.estado">
+            <option value="pendiente">Pendiente</option>
+            <option value="confirmado">Confirmado</option>
+            <option value="cancelado">Cancelado</option>
+        </select>
+    </div>
+    <div class="modify-form__buttons">
+        <button (click)="enviarModificacion()" [disabled]="turnoSeleccionado.horario === '' || turnoSeleccionado.razon === '' || turnoSeleccionado.descripcion === ''">Confirmar</button>
+        <button (click)="cerrar()">Salir</button>
+    </div>
+</div>

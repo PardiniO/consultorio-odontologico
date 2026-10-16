@@ -4,7 +4,7 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    width: 15vw;
+    width: 20vw;
     height: 30vh;
     border-radius: 11px;
     border: 2px solid gray;
@@ -25,7 +25,7 @@
     text-align: center;
     flex-wrap: wrap;
     width: 100%;
-    height: 25%;
+    height: 35%;
     padding: 10px;
     background: rgb(207, 207, 207);
     border-radius: 10px 10px 0 0;
@@ -35,33 +35,18 @@
 .turno-card__body {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    text-align: center;
+    text-align: start;
     flex-wrap: wrap;
     overflow: auto;
     overflow-x: hidden;
     width: 100%;
     flex-grow: 1;
     gap: 10px;
-    padding: 10px 0;
-    background: rgb(230, 230, 230);
+    padding: 10px;
+    background: rgb(245, 245, 245);
     border-radius: 0 0 10px 10px;
-}
-
-.turno-card__buttons {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    flex-grow: 1;
-    width: 100%;
-    gap: 10px;
-    padding: 10px 0;
-    border-radius: 0 0 10px 10px;
-    border-top: 2px solid gray;
-    background: rgb(207, 207, 207);
 }
 
 button {
@@ -78,5 +63,18 @@ button:hover {
 }
 
 p {
+    width: 100%;
     font-size: 0.85rem;
+}
+
+.pendiente {
+    background-color: rgb(247, 252, 150);
+}
+
+.confirmado {
+    background-color: rgb(150, 252, 150);
+}
+
+.cancelado {
+    background-color: rgb(252, 150, 150);
 }

@@ -1,1 +1,18 @@
-<p>paciente-modificar works!</p>
+<div class="modify-form">
+    <div class="modify-form__field-container">
+        <label for="name">Nombre:</label>
+        <input id="name" type="text" placeholder="Ej: Jhon" [(ngModel)]="pacienteSeleccionado.nombre">
+    </div>
+    <div class="modify-form__field-container">
+        <label for="surname">Apellido:</label>
+        <input id="surname" type="text" placeholder="Ej: Doe" [(ngModel)]="pacienteSeleccionado.apellido">
+    </div>
+    <div class="modify-form__field-container">
+        <label for="birth-date">Fecha de nacimiento:</label>
+        <input id="birth-date" type="date" [(ngModel)]="pacienteSeleccionado.fecha_nacimiento">
+    </div>
+    <div class="modify-form__buttons">
+        <button (click)="enviarModificacion()" [disabled]="pacienteSeleccionado.nombre === '' || pacienteSeleccionado.apellido === ''">Confirmar</button>
+        <button (click)="cerrar()">Salir</button>
+    </div>
+</div>

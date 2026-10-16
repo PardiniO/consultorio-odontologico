@@ -1,0 +1,16 @@
+.home-button {
+    width: 75px;
+    background: none;
+    border: none;
+    transition: all 0.25s;
+
+    img {
+        width: 50%;
+        object-fit: contain;
+    }
+}
+
+.home-button:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}

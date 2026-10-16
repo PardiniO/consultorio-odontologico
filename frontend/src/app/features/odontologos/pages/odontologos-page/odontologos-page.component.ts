@@ -16,6 +16,7 @@ export class OdontologosPageComponent implements OnInit {
   private doctoresService = inject(DoctoresService);
 
   panelModificarDoctorVisible: boolean = false;
+  panelCrearDoctorVisible: boolean = false;
 
   ngOnInit(): void {
     this.load();
@@ -80,6 +81,18 @@ export class OdontologosPageComponent implements OnInit {
     }
   }
 
+  create(d: Omit<Doctor, 'id_doctor'>): void {
+    this.doctoresService.create(d).subscribe({
+      next: () => {
+        this.load();
+        this.togglePannel2();
+      },
+      error: (e) => {
+        console.error(e);
+      }
+    });
+  }
+
   remove(id: number): void {
     console.log(id);
     this.doctoresService.remove(id).subscribe({
@@ -103,6 +116,10 @@ export class OdontologosPageComponent implements OnInit {
 
   togglePannel(): void {
     this.panelModificarDoctorVisible = !this.panelModificarDoctorVisible;
+  }
+
+  togglePannel2(): void {
+    this.panelCrearDoctorVisible = !this.panelCrearDoctorVisible;
   }
 
   ngOnDestroy(): void {
