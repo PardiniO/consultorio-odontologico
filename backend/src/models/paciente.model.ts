@@ -13,14 +13,6 @@ export type PacienteInput = Omit<Paciente, 'id'>;
 interface PacienteRow extends RowDataPacket, Paciente {}
 
 export const PacienteModel = {
-    // async findAll(limit: number, offset: number): Promise<Paciente[]> {
-    //     const [rows] = await pool.query<PacienteRow[]>(
-    //         'SELECT id_paciente, nombre, apellido, fecha_nacimiento FROM pacientes LIMIT ? OFFSET ?',
-    //         [limit, offset]
-    //     );
-    //     return rows;
-    // },
-
     async findAll(): Promise<Paciente[]> {
         const [rows] = await pool.query<PacienteRow[]>(
             'SELECT id_paciente, nombre, apellido, fecha_nacimiento FROM pacientes'
@@ -32,13 +24,6 @@ export const PacienteModel = {
         const [rows] = await pool.query<PacienteRow[]>(
             'SELECT id_paciente, nombre, apellido, fecha_nacimiento FROM pacientes WHERE id_paciente = ?; ',
             [id]
-        );
-        return rows[0] ?? null;
-    },
-
-    async findByName(name: string): Promise<Paciente | null> {
-        const [rows] = await pool.query<PacienteRow[]>(
-            'SELECT * FROM pacientes WHERE nombre = ?; ', [name]
         );
         return rows[0] ?? null;
     },
@@ -61,7 +46,7 @@ export const PacienteModel = {
 
     async remove(id: number): Promise<boolean> {
         const [result] = await pool.query<ResultSetHeader>(
-            'DELETE FROM Pacientes WHERE id_paciente = ?',
+            'DELETE FROM Pacientes WHERE id = ?',
             [id]
         );
         return result.affectedRows > 0;

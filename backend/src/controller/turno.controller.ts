@@ -62,7 +62,7 @@ export const update = async (req: Request<IdParams>, res: Response) => {
     const ok = await TurnoModel.update(id, req.body);
     if (!ok) { res.status(404).json({ error: 'Turno no encontrado' }); return; }
 
-    res.json({ id, ...req.body });
+    res.json({ id_turno: id, ...req.body });
 };
 
 export const remove = async (req: Request<IdParams>, res: Response) => {
