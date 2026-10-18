@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Turno } from '../models/turno.interface';
@@ -17,6 +17,11 @@ export class TurnosService {
   
     getById(id: number): Observable<Turno> {
       return this.http.get<Turno>(`${this.apiUrl}/${id}`);
+    }
+
+    getTurnos(searchTerm: string): Observable<string[]> {
+      const params = new HttpParams().set('q', searchTerm);
+      return this.http.get<string[]>(this.apiUrl, { params });
     }
   
     create(turno: Omit<Turno, 'id_turno'>): Observable<Turno> {

@@ -113,6 +113,18 @@ export class OdontologosPageComponent implements OnInit {
     this.doctorSeleccionado = value;
     console.log(this.doctorSeleccionado); 
   }
+  
+  handleSearch(term: string): void {
+    this.doctoresService.getDoctores(term).subscribe({
+      next: (data) => {
+        /** Ehhhhhhhhh */
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
+  }
+
 
   togglePannel(): void {
     this.panelModificarDoctorVisible = !this.panelModificarDoctorVisible;

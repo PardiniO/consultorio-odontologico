@@ -12,6 +12,7 @@ export class PacientesPageComponent implements OnInit {
   pacientes: Paciente[] = [];
   pacienteSeleccionado: Paciente | null = null;
 
+
   private pacientesSub!: Subscription;
   private pacientesService = inject(PacientesService);
 
@@ -118,6 +119,18 @@ export class PacientesPageComponent implements OnInit {
   togglePannel2(): void {
     this.panelCrearPacienteVisible = !this.panelCrearPacienteVisible;
   }
+  
+  handleSearch(term: string): void {
+    this.pacientesService.getPacientes(term).subscribe({
+      next: (data) => {
+        /** No sé qué iría acá... */
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
+  }
+
 
   ngOnDestroy(): void {
     this.pacientesSub.unsubscribe();

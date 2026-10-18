@@ -1,12 +1,12 @@
-<app-header [titulo]="'Pacientes'"></app-header>
+<app-header [titulo]="'Pacientes'">
+    <app-search-bar
+        [placeholderText]="Buscar pacientes..."
+        (searchEvent)="handleSearch($event)">
+
+    </app-search-bar>
+</app-header>
 <div class="content">
     <div class="content__patients-manager">
-        <div class="content__search-bar" *ngIf="!panelModificarPacienteVisible && !panelCrearPacienteVisible">
-            <app-home-button></app-home-button>
-            <input #q type="search" placeholder="Buscar paciente..." (keyup.enter)="getByName(q.value)">
-            <button (click)="getByName(q.value)">Buscar</button>
-            <button class="create-btn" (click)="togglePannel2()">+</button>
-        </div>
         <div class="content__patients-section">
             <div class="content__patients" *ngIf="!panelModificarPacienteVisible && !panelCrearPacienteVisible">
                 <app-paciente-card *ngFor="let p of pacientes" [paciente]="p" (modificar)="selectPatient($event)"

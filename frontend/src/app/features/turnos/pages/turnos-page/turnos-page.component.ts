@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
 export class TurnosPageComponent implements OnInit {
   turnos: Turno[] = [];
   turnoSeleccionado: Turno | null = null;
+  turnosFiltrados: string[] = [];
 
   private turnosSub!: Subscription;
   private turnosService = inject(TurnosService);
@@ -97,6 +98,17 @@ export class TurnosPageComponent implements OnInit {
 
     this.turnoSeleccionado = value;
     console.log(this.turnoSeleccionado);
+  }
+  
+  handleSearch(term: string): void {
+    this.turnosService.getTurnos(term).subscribe({
+      next: (data) => {
+        this.turnosFiltrados = data;
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
   }
 
   togglePannel(): void {

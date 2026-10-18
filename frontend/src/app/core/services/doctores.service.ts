@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Doctor } from '../models/doctor.interface';
@@ -17,6 +17,11 @@ export class DoctoresService {
 
   getById(id: number): Observable<Doctor> {
     return this.http.get<Doctor>(`${this.apiUrl}/${id}`);
+  }
+  
+  getDoctores(searchTerm: string): Observable<string[]> {
+    const params = new HttpParams().set('q', searchTerm);
+    return this.http.get<string[]>(this.apiUrl, { params });
   }
 
   getByName(name: string): Observable<Doctor> {

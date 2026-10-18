@@ -23,6 +23,7 @@ import { PacientesPageComponent } from './features/pacientes/pages/pacientes-pag
 import { HomeButtonComponent } from './shared/components/home-button/home-button.component';
 import { TurnoAltaComponent } from './features/turnos/components/turno-alta/turno-alta.component';
 import { TurnoModificarComponent } from './features/turnos/components/turno-modificar/turno-modificar.component';
+import { SearchBarComponent } from './shared/components/search-bar/search-bar.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { TurnoModificarComponent } from './features/turnos/components/turno-modi
     PacientesPageComponent,
     HomeButtonComponent,
     TurnoAltaComponent,
-    TurnoModificarComponent
+    TurnoModificarComponent,
+    SearchBarComponent
   ],
   imports: [
     BrowserModule,
