@@ -1,0 +1,22 @@
+<div class="wrapper">
+    <app-header
+    [titulo]="'Gestor de odontologos'"
+    ></app-header>
+    <div class="content">
+        <div class="content__doctors-manager">
+            <div class="content__search-bar">
+                <input #q type="search" placeholder="Buscar doctor..." (keyup.enter)="getByName(q.value)">
+                <button (click)="getByName(q.value)">Buscar</button>
+                <button class="create-btn" routerLink="/odontologos-alta">+</button>
+            </div>
+            <div class="content__doctors-section">
+                <div class="content__doctors" *ngIf="!panelModificarDoctorVisible">
+                    <app-odontologo-card *ngFor="let d of doctores" [doctor]="d" (modificar)="selectDoctor($event)" (eliminar)="remove($event)"></app-odontologo-card>
+                </div>
+                <div class="content__modify-doctor" *ngIf="panelModificarDoctorVisible">
+                    <app-odontologo-modificar *ngIf="doctorSeleccionado" [doctorSeleccionado]="doctorSeleccionado" (salir)="togglePannel()" (modificar)="update($event)"></app-odontologo-modificar>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

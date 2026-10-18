@@ -1,0 +1,36 @@
+.contenido {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-grow: 1;
+}
+
+.barra-acciones {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    text-align: center;
+    width: 20%;
+    flex-grow: 1;
+}
+
+.turnos {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-wrap: wrap;
+    overflow: auto;
+    overflow-x: hidden;
+    width: 80%;
+    height: 90vh;
+    padding: 10px 0;
+    gap: 10px;
+    background: radial-gradient(rgba(205, 205, 205, 0.507), rgba(212, 212, 212, 0.638));
+    border-top: 2px solid gray;
+    border-bottom: 2px solid gray;
+}

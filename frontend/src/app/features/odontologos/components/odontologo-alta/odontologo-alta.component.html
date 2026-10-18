@@ -1,0 +1,28 @@
+<div class="wrapper">
+    <div class="form">
+        <p>Alta de Odontólogo</p>
+        <div class="form__field">
+            <label for="nombre" class="form__label">Nombre:</label>
+            <input id="nombre" type="text" placeholder="Ej: Jhon" class="form__input" [(ngModel)]="doctor.nombre">
+        </div>
+        <div class="form__field">
+            <label for="apellido" class="form__label">Apellido:</label>
+            <input id="apellido" type="text" placeholder="Ej: Doe" class="form__input" [(ngModel)]="doctor.apellido">
+        </div>
+        <div class="form__field">
+            <label for="speciality">Especialidad:</label>
+            <select name="speciality" id="speciality" [(ngModel)]="doctor.rol">
+                <option value="Endodoncista">Endodoncista</option>
+                <option value="Ortodoncista">Ortodoncista</option>
+            </select>
+        </div>
+        <div class="form__field">
+            <label for="es_admin">Admin:</label>
+            <input id="es_admin" type="checkbox" [(ngModel)]="doctor.es_admin">
+        </div>
+        <div class="form__buttons">
+            <button class="form__button" (click)="create()" [disabled]="doctor.nombre === '' || doctor.apellido === ''" routerLink="/odontologos">Confirmar</button>
+            <button class="form__button" routerLink="/odontologos">Salir</button>
+        </div>
+    </div>
+</div>

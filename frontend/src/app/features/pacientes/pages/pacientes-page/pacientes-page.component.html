@@ -1,0 +1,4 @@
+<app-header [titulo]="'Pacientes'"></app-header>
+<div class="patients">
+    <app-paciente-card *ngFor="let p of pacientes" [paciente]="p"></app-paciente-card>
+</div>
