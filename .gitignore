@@ -1,3 +1,4 @@
+```gitignore
 # Compiled output
 dist/
 tmp/
@@ -8,7 +9,10 @@ bazel-out/
 node_modules/
 npm-debug.log
 yarn-error.log
+
+# Variables de entorno
 .env
+backend/.env
 
 # IDEs and editors
 .idea/
@@ -40,10 +44,6 @@ typings/
 .DS_Store
 Thumbs.db
 
-
-# POR LAS DUDAS
-frontend
-backend/mi-api-explicada/
-backend/node-modules/
-backend/dist/
-backend/.env
+# Carpetas que no quiero subir
+/frontend/
+/backend/mi-api-explicada/
