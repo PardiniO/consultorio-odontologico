@@ -1,0 +1,130 @@
+.login-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+    background: url('../../../../../../public/bg-8.jpg');
+    background-position: center;
+}
+
+.login-form__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    padding: 20px 0;
+    background-color: rgba(128, 128, 128, 0.325);
+    backdrop-filter: blur(10px);
+}
+
+.login-form__content {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+}
+
+.login-form__side-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 65%;
+    flex-grow: 1;
+}
+
+.form__field {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    padding: 15px;
+    width: 95%;
+    height: 10%;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    width: 25%;
+    height: 45%;
+    gap: 10%;
+    border-radius: 10px;
+    border: 2px solid rgba(193, 193, 193, 0.355);
+    background: rgba(128, 128, 128, 0.284);
+    backdrop-filter: blur(10px);
+}
+
+.form__field-button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    flex-grow: 1;
+}
+
+label, p {
+    font-size: 0.95rem;
+}
+
+.input-text, .input-email, .input-password {
+    width: 60%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid rgb(194, 194, 194);
+    background-color: white;
+}
+
+.input-radio {
+    transform: scale(1.5);
+}
+
+.create-account-button, .login-button, .back-button {
+    width: 55%;
+    padding: 10px;
+    border-radius: 10px;
+    transition: all 0.25s;
+    cursor: pointer;
+}
+
+.create-account-button {
+    border: 2px solid rgba(255, 255, 255, 0.561);
+    background: rgba(255, 255, 255, 0.632);
+    color: black;
+}
+
+.create-account-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 3px 0 0 rgba(255, 255, 255, 0.561);
+}
+
+.login-button {
+    border: 2px solid rgba(71, 71, 71, 0.303);
+    background: rgba(72, 72, 72, 0.321);
+    color: white;
+    width: 35%;
+}
+
+.login-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 3px 0 0 rgba(71, 71, 71, 0.303);
+}
+
+.back-button {
+    width: 25%;
+    border: 2px solid rgb(133, 133, 255);
+}
+
+.back-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 3px 0 0 rgb(133, 133, 255);
+}

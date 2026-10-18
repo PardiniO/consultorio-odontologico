@@ -39,7 +39,8 @@ export const TurnoModel = {
                 turnos.id_doctor, doctores.nombre, doctores.apellido, doctores.rol
             FROM turnos
             JOIN pacientes ON pacientes.id_paciente = turnos.id_paciente
-            JOIN doctores ON doctores.id_doctor = turnos.id_doctor`
+            JOIN doctores ON doctores.id_doctor = turnos.id_doctor
+            ORDER BY horario DESC`
         );
         return rows;
     },

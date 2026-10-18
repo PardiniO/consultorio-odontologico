@@ -5,3 +5,13 @@
     box-sizing: border-box;
     font-family: sans-serif;
 }
+
+@keyframes appear {
+    from {
+        transform: scale(0);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}

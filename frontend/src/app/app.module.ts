@@ -23,6 +23,10 @@ import { PacientesPageComponent } from './features/pacientes/pages/pacientes-pag
 import { HomeButtonComponent } from './shared/components/home-button/home-button.component';
 import { TurnoAltaComponent } from './features/turnos/components/turno-alta/turno-alta.component';
 import { TurnoModificarComponent } from './features/turnos/components/turno-modificar/turno-modificar.component';
+import { RegisterFormComponent } from './features/register/components/register-form/register-form.component';
+import { RegisterPageComponent } from './features/register/pages/register-page/register-page.component';
+import { LoginFormComponent } from './features/login/components/login-form/login-form.component';
+import { LoginPageComponent } from './features/login/pages/login-page/login-page.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +47,11 @@ import { TurnoModificarComponent } from './features/turnos/components/turno-modi
     PacientesPageComponent,
     HomeButtonComponent,
     TurnoAltaComponent,
-    TurnoModificarComponent
+    TurnoModificarComponent,
+    RegisterFormComponent,
+    RegisterPageComponent,
+    LoginFormComponent,
+    LoginPageComponent
   ],
   imports: [
     BrowserModule,

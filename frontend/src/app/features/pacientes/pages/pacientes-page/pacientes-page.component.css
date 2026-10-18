@@ -42,7 +42,22 @@
     gap: 15px;
     padding: 20px 0;
     flex-grow: 1;
-    background-color: rgb(232, 232, 232);
+    background: url('../../../../../../public/bg-6.jpg');
+    background-attachment: fixed;
+    background-position: center;
+}
+
+.content__create-patients {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    height: 90vh;
+    flex-grow: 1;
+    background: url('../../../../../../public/bg-4.jpg');
+    background-position: center;
 }
 
 .content__patients-section {
