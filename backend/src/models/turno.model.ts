@@ -18,20 +18,6 @@ export type TurnoInput = Omit<Turno, 'id'>;
 interface TurnoRow extends RowDataPacket, Turno {}
 
 export const TurnoModel = {
-    // async findAll(limit: number, offset: number): Promise<Turno[]> {
-    //     const [rows] = await pool.query<TurnoRow[]>(
-    //         `SELECT turnos.id_turno, turnos.horario, turnos.sala, turnos.razon, turnos.descripcion, turnos.estado, turnos.id_paciente, 
-    //             pacientes.nombre, pacientes.apellido, pacientes.fecha_nacimiento,
-    //             turnos.id_doctor
-    //             doctores.nombre, doctores.apellido, doctores.rol
-    //         FROM turnos
-    //         JOIN pacientes ON pacientes.id_paciente = turnos.id_paciente
-    //         JOIN doctores ON doctores.id_doctor = turnos.id_doctor
-    //         LIMIT ? OFFSET ?`,
-    //         [limit, offset]
-    //     );
-    //     return rows;
-    // },
     async findAll(): Promise<Turno[]> {
         const [rows] = await pool.query<TurnoRow[]>(
             `SELECT turnos.id_turno, turnos.horario, turnos.sala, turnos.razon, turnos.descripcion, turnos.estado, turnos.id_paciente, 

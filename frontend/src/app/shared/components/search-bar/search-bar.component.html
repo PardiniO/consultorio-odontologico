@@ -1,14 +1,14 @@
-<div class="content__search-bar" *ngIf="!panelModificarDoctorVisible && !panelCrearDoctorVisible">
+<div class="content__search-bar">
     <div class="busqueda">
         <input 
             #q 
             type="text" 
-            [placeholder]="Buscar doctor..."
+            placeholder="'Buscar...'"
             (input)="onSearch($event)"
-            (keyup.enter)="getByName(q.value)"
+            (keyup.enter)="onSearch($event)"
             class="search-input"/>
         
-        <button type="button" (click)="buscarTermino(q.value)">Buscar</button>
+        <button type="button" (click)="onSearch($event)">Buscar</button>
     </div>
 
     <div class="filtro-icon">
