@@ -43,3 +43,7 @@ Thumbs.db
 
 # POR LAS DUDAS
 frontend
+backend/mi-api-explicada/
+backend/node-modules/
+backend/dist/
+backend/.env
