@@ -11,5 +11,5 @@ router.use('/turnos', turnoRoutes);
 router.use('/doctores', doctorRoutes);
 router.use('/doctores', authRoutes);
 router.use('/pacientes', pacienteRoutes);
-
+router.use('/pacientes', authRoutes);
 export default router;

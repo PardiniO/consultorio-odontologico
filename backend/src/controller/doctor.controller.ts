@@ -2,7 +2,7 @@ import type { Request, Response } from "express";
 import { DoctorModel, type DoctorInput } from "../models/doctor.model";
 
 type IdParams = { id: string };
-type NameParams = { nombre: string };
+type UserParams = { user: string };
 
 function parseId(value: string): number | null {
     const id = Number(value);
@@ -41,14 +41,14 @@ export const getById = async (req: Request<IdParams>, res: Response) => {
     res.json(doctor);
 };
 
-export const getByName = async (req: Request<NameParams>, res: Response) => {
-    const name = req.params.nombre;
-    if (!name) {
-        res.status(400).json({error: 'Nombre inválido'});
+export const getByUser = async (req: Request<UserParams>, res: Response) => {
+    const user = req.params.user;
+    if (!user) {
+        res.status(400).json({error: 'Usuario inválido'});
         return;
     };
 
-    const doctor = await DoctorModel.findByUser(name);
+    const doctor = await DoctorModel.findByUser(user);
     if (!doctor) {
         res.status(404).json({error: 'Doctor no encontrado'});
         return;

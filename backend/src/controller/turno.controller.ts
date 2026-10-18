@@ -21,7 +21,7 @@ function isTurnoInput(body: any): body is TurnoInput {
 }
 
 export const getAll = async (_req: Request, res: Response) => {
-    res.json(await TurnoModel.findAll(15, 15));
+    res.json(await TurnoModel.findAll());
 };
 
 export const getById = async (req: Request<IdParams>, res: Response) => {

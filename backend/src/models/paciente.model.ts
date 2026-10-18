@@ -13,14 +13,6 @@ export type PacienteInput = Omit<Paciente, 'id'>;
 interface PacienteRow extends RowDataPacket, Paciente {}
 
 export const PacienteModel = {
-    // async findAll(limit: number, offset: number): Promise<Paciente[]> {
-    //     const [rows] = await pool.query<PacienteRow[]>(
-    //         'SELECT id_paciente, nombre, apellido, fecha_nacimiento FROM pacientes LIMIT ? OFFSET ?',
-    //         [limit, offset]
-    //     );
-    //     return rows;
-    // },
-
     async findAll(): Promise<Paciente[]> {
         const [rows] = await pool.query<PacienteRow[]>(
             'SELECT id_paciente, nombre, apellido, fecha_nacimiento FROM pacientes'

@@ -16,13 +16,6 @@ export type DoctorInput = Omit<Doctor, 'id'>;
 interface DoctorRow extends RowDataPacket, Doctor {}
 
 export const DoctorModel = {
-    // async findAll(limit: number, offset: number): Promise<Doctor[]> {
-    //     const [rows] = await pool.query<DoctorRow[]>(
-    //         'SELECT id_doctor, nombre, apellido, rol, es_admin FROM doctores LIMIT ? OFFSET ?',
-    //         [limit, offset]
-    //     );
-    //     return rows;
-    // },
     async findAll(): Promise<Doctor[]> {
         const [rows] = await pool.query<DoctorRow[]>(
             'SELECT id_doctor, nombre, apellido,usuario, contraseña, rol, es_admin FROM doctores'

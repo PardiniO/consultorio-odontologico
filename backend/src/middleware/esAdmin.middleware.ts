@@ -5,12 +5,12 @@ type RequestConUsuario = Request & {
   usuario?: {
     id: number;
     rol: string;
-    esAdmin: boolean;
+    esAdmin: number;
   };
 };
 
 function esAdmin(req: RequestConUsuario , res: Response, next: NextFunction) {
-  if (!req.usuario || req.usuario.esAdmin === false) {
+  if (!req.usuario || req.usuario.esAdmin === 0) {
     return res.status(403).json({ error: 'No tenés permiso para hacer esto' });
   }
   next();

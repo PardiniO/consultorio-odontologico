@@ -31,7 +31,7 @@ export type TurnoInput = Omit<Turno,
 interface TurnoRow extends RowDataPacket, Turno {}
 
 export const TurnoModel = {
-    async findAll(limit: number, offset: number): Promise<Turno[]> {
+    async findAll(): Promise<Turno[]> {
         const [rows] = await pool.query<TurnoRow[]>(
             `SELECT
                 id_turno AS id,
@@ -48,12 +48,7 @@ export const TurnoModel = {
                 nombre_doctor,
                 apellido_doctor,
                 rol_doctor
-            FROM v_turnos
-            LIMIT ? OFFSET ?;`,
-            [
-                limit, 
-                offset
-            ]
+            FROM v_turnos;`,
         );
         return rows;
     },
@@ -83,13 +78,14 @@ export const TurnoModel = {
     },
     async create(data: TurnoInput): Promise<Turno | null> {
         const [result] = await pool.query<ResultSetHeader>(
-            `INSERT INTO turnos (horario, sala, razon, descripcion, id_paciente, id_doctor)
+            `INSERT INTO turnos (horario, sala, razon, descripcion, estado, id_paciente, id_doctor)
             VALUES (?, ?, ?, ?, ?, ?)`,
             [
                 data.horario, 
                 data.sala, 
                 data.razon, 
-                data.descripcion, 
+                data.descripcion,
+                data.estado, 
                 data.id_paciente, 
                 data.id_doctor
             ]
