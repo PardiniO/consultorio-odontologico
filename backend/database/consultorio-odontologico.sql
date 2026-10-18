@@ -5,7 +5,10 @@ CREATE TABLE pacientes(
         id_paciente INT PRIMARY KEY AUTO_INCREMENT,
         nombre VARCHAR(30) NOT NULL,
         apellido VARCHAR(30) NOT NULL,
-        fecha_nacimiento DATE NOT NULL
+        fecha_nacimiento DATE NOT NULL,
+		
+        usuario VARCHAR(30) NOT NULL UNIQUE,
+        contraseña VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE doctores(
@@ -29,9 +32,9 @@ CREATE TABLE turnos(
         estado ENUM('pendiente', 'cancelado', 'confirmado') NOT NULL,
         
         id_paciente INT NOT NULL,
-        FOREIGN KEY (id_paciente) REFERENCES pacientes(id_paciente),
+        FOREIGN KEY (id_paciente) REFERENCES pacientes(id_paciente) ON DELETE CASCADE,
         id_doctor INT NOT NULL,
-        FOREIGN KEY (id_doctor) REFERENCES doctores(id_doctor)
+        FOREIGN KEY (id_doctor) REFERENCES doctores(id_doctor) ON DELETE CASCADE
 );
 
 SELECT * FROM doctores;
