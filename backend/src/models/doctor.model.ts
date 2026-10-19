@@ -1,12 +1,13 @@
 import type { RowDataPacket, ResultSetHeader } from "mysql2/promise";
 import { pool } from "../config/db";
-import { off } from "node:cluster";
 
 export interface Doctor {
     id: number;
     nombre: string;
     apellido: string;
     rol: 'Endodoncista' | 'Ortodoncista';
+    usuario: string;
+    contraseña: string;
     es_admin: boolean;
 }
 
@@ -15,39 +16,32 @@ export type DoctorInput = Omit<Doctor, 'id'>;
 interface DoctorRow extends RowDataPacket, Doctor {}
 
 export const DoctorModel = {
-    // async findAll(limit: number, offset: number): Promise<Doctor[]> {
-    //     const [rows] = await pool.query<DoctorRow[]>(
-    //         'SELECT id_doctor, nombre, apellido, rol, es_admin FROM doctores LIMIT ? OFFSET ?',
-    //         [limit, offset]
-    //     );
-    //     return rows;
-    // },
     async findAll(): Promise<Doctor[]> {
         const [rows] = await pool.query<DoctorRow[]>(
-            'SELECT * FROM doctores'
+            'SELECT id_doctor, nombre, apellido,usuario, contraseña, rol, es_admin FROM doctores'
         );
         return rows;
     },
 
     async findById(id: number): Promise<Doctor | null> {
         const [rows] = await pool.query<DoctorRow[]>(
-            'SELECT id_doctor, nombre, apellido, rol, es_admin FROM doctores WHERE id_doctor = ?',
+            'SELECT id_doctor, nombre, apellido,usuario, contraseña, rol, es_admin FROM doctores WHERE id_doctor = ?',
             [id]
         );
         return rows[0] ?? null;
     },
 
-    async findByName(name: string): Promise<Doctor | null> {
+    async findByUser(name: string): Promise<Doctor | null> {
         const [rows] = await pool.query<DoctorRow[]>(
-            'SELECT * FROM doctores WHERE nombre = ?', [name]
+            'SELECT id_doctor, nombre, apellido, usuario, contraseña, rol, es_admin FROM doctores WHERE usuario = ?', [name]
         );
         return rows[0] ?? null;
     },
 
     async create(data: DoctorInput): Promise<Doctor> {
         const [result] = await pool.query<ResultSetHeader>(
-            'INSERT INTO doctores (nombre, apellido, rol, es_admin) VALUES (?, ?, ?, ?)',
-            [data.nombre, data.apellido, data.rol, data.es_admin]
+            'INSERT INTO doctores (nombre, apellido, rol, usuario, contraseña, es_admin) VALUES (?, ?, ?, ?, ?, ?)',
+            [data.nombre, data.apellido, data.rol, data.usuario, data.contraseña, data.es_admin]
         );
         return { id: result.insertId, ...data };
     },

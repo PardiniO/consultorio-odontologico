@@ -54,7 +54,7 @@
     height: 79vh;
     padding: 10px 0;
     gap: 10px;
-    background: radial-gradient(rgba(226, 225, 225, 0.356), rgba(212, 212, 212, 0.638));
+    background: url('../../../../../../public/bg-2.jpg');
     border-top: 2px solid gray;
     border-bottom: 2px solid gray;
 }
@@ -67,6 +67,19 @@
     text-align: center;
     height: 90vh;
     flex-grow: 1;
+}
+
+.content__create-turno {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    height: 90vh;
+    flex-grow: 1;
+    background: url('../../../../../../public/bg-5.jpg');
+    background-position: center;
 }
 
 .create-btn {

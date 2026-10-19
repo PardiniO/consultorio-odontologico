@@ -2,7 +2,7 @@ import type { Request, Response } from "express";
 import { DoctorModel, type DoctorInput } from "../models/doctor.model";
 
 type IdParams = { id: string };
-type NameParams = { nombre: string };
+type UserParams = { user: string };
 
 function parseId(value: string): number | null {
     const id = Number(value);
@@ -14,6 +14,8 @@ function isDoctorInput(body: any): body is DoctorInput {
         typeof body?.nombre === 'string' && body.nombre.trim() !== '' &&
         typeof body?.apellido === 'string' && body.apellido.trim() !== '' &&
         typeof body?.rol === 'string' && (body.rol === 'Endodoncista' || body.sala === 'Ortodoncista') &&
+        typeof body?.usuario === 'string' && body.usuario.trim() !== '' &&
+        typeof body?.contraseña === 'string' && body.contraseña.trim() !== '' &&
         typeof body?.es_admin === 'boolean'
     );
 }
@@ -39,14 +41,14 @@ export const getById = async (req: Request<IdParams>, res: Response) => {
     res.json(doctor);
 };
 
-export const getByName = async (req: Request<NameParams>, res: Response) => {
-    const name = req.params.nombre;
-    if (!name) {
-        res.status(400).json({error: 'Nombre inválido'});
+export const getByUser = async (req: Request<UserParams>, res: Response) => {
+    const user = req.params.user;
+    if (!user) {
+        res.status(400).json({error: 'Usuario inválido'});
         return;
     };
 
-    const doctor = await DoctorModel.findByName(name);
+    const doctor = await DoctorModel.findByUser(user);
     if (!doctor) {
         res.status(404).json({error: 'Doctor no encontrado'});
         return;

@@ -7,9 +7,13 @@ import { PacientesPageComponent } from './features/pacientes/pages/pacientes-pag
 import { OdontologoAltaComponent } from './features/odontologos/components/odontologo-alta/odontologo-alta.component';
 import { PacienteAltaComponent } from './features/pacientes/components/paciente-alta/paciente-alta.component';
 import { TurnoAltaComponent } from './features/turnos/components/turno-alta/turno-alta.component';
+import { RegisterPageComponent } from './features/register/pages/register-page/register-page.component';
+import { LoginPageComponent } from './features/login/pages/login-page/login-page.component';
 
 const routes: Routes = [
   {path: '', component: HomePageComponent},
+  // {path: '', component: RegisterPageComponent},
+  {path: 'login', component: LoginPageComponent},
   {path: 'odontologos', component: OdontologosPageComponent},
   {path: 'pacientes', component: PacientesPageComponent},
   {path: 'turnos', component: TurnosPageComponent},

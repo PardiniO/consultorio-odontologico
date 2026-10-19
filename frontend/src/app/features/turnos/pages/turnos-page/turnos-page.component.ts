@@ -35,7 +35,7 @@ export class TurnosPageComponent implements OnInit {
   }
 
   update(t: Turno): void {
-    const turnoMOD: Omit<Turno, 'id_turno'> = {
+    const turnoMOD: Omit<Turno, 'id'> = {
       horario: t.horario,
       sala: t.sala,
       razon: t.razon,
@@ -45,7 +45,7 @@ export class TurnosPageComponent implements OnInit {
       id_doctor: t.id_doctor
     };
 
-    this.turnosService.update(t.id_turno, turnoMOD).subscribe({
+    this.turnosService.update(t.id, turnoMOD).subscribe({
       next: () => {
         this.load();
       },
@@ -68,7 +68,7 @@ export class TurnosPageComponent implements OnInit {
     });
   }
 
-  create(t: Omit<Turno, 'id_turno'>): void {
+  create(t: Omit<Turno, 'id'>): void {
     this.turnosService.create(t).subscribe({
       next: () => {
         this.load();

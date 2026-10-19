@@ -17,6 +17,6 @@ export class TurnoCardComponent {
   }
 
   eliminarTurno(): void {
-    this.eliminar.emit(this.turno.id_turno);
+    this.eliminar.emit(this.turno.id);
   }
 }
