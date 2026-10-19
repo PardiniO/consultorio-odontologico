@@ -11,7 +11,7 @@ export class DoctoresService {
 
   private http = inject(HttpClient);
 
-  private token: string = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2wiOiJFbmRvZG9uY2lzdGEiLCJlc0FkbWluIjoxLCJpYXQiOjE3OTI0NDIzMjEsImV4cCI6MTc5MjQ0OTUyMX0.YXhajXlgBtb6js-cvYr6awINgUtw2ZHjwomHfFt_trE';
+  private token: string = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2wiOiJFbmRvZG9uY2lzdGEiLCJlc0FkbWluIjoxLCJpYXQiOjE3OTI0NDkwMDEsImV4cCI6MTc5MjQ1NjIwMX0.DKVtn7yrZZP2Asz80_9D8NCVpk1U3Oqf51aw92n_fPM';
 
   private headers = new HttpHeaders({
     'Content-Type': 'application/json',
@@ -28,7 +28,7 @@ export class DoctoresService {
   
   getDoctores(searchTerm: string): Observable<Doctor[]> {
     const params = new HttpParams().set('q', searchTerm);
-    return this.http.get<Doctor[]>(this.apiUrl, { params });
+    return this.http.get<Doctor[]>(this.apiUrl, { headers: this.headers });
   }
 
   getByName(name: string): Observable<Doctor> {

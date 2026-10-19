@@ -6,9 +6,9 @@ CREATE TABLE pacientes(
         nombre VARCHAR(30) NOT NULL,
         apellido VARCHAR(30) NOT NULL,
         fecha_nacimiento DATE NOT NULL,
-		
+        
         usuario VARCHAR(30) NOT NULL UNIQUE,
-        contraseña VARCHAR(255) NOT NULL
+        contrasena VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE doctores(
@@ -18,7 +18,7 @@ CREATE TABLE doctores(
         rol ENUM('Endodoncista', 'Ortodoncista') NOT NULL,
         
         usuario VARCHAR(30) NOT NULL UNIQUE,
-        contraseña VARCHAR(255) NOT NULL,
+        contrasena VARCHAR(255) NOT NULL,
         
         es_admin BOOLEAN NOT NULL
 );
@@ -36,8 +36,3 @@ CREATE TABLE turnos(
         id_doctor INT NOT NULL,
         FOREIGN KEY (id_doctor) REFERENCES doctores(id_doctor) ON DELETE CASCADE
 );
-
-SELECT * FROM doctores;
-SELECT id_doctor, usuario, contraseña, es_admin
-FROM doctores
-WHERE usuario = 'martin123';

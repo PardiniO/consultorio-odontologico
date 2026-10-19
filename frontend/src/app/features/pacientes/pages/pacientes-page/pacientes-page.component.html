@@ -34,11 +34,11 @@
             <div class="content__create-patients" *ngIf="panelCrearPacienteVisible">
                 <app-paciente-alta 
                     (salir)="toggleCrearPanel()"
-                    (crear)="create($event)">
+                    (crear)="register($event)">
                 </app-paciente-alta>
             </div>
             <div class="content__create-patients" *ngIf="panelCrearPacienteVisible">
-                <app-paciente-alta *ngIf="panelCrearPacienteVisible" (salir)="togglePannel2()"
+                <app-paciente-alta *ngIf="panelCrearPacienteVisible" (salir)="toggleCrearPanel()"
                 (crear)="register($event)"></app-paciente-alta>
             </div>
         </div>

@@ -69,7 +69,7 @@ export class TurnosPageComponent implements OnInit, OnDestroy {
     });
   }
 
-  create(t: Omit<Turno, 'id'>): void {
+  register(t: Omit<Turno, 'id'>): void {
     const sub = this.turnosService.create(t).subscribe({
       next: () => {
         this.load();
