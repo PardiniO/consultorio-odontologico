@@ -24,6 +24,10 @@ import { HomeButtonComponent } from './shared/components/home-button/home-button
 import { TurnoAltaComponent } from './features/turnos/components/turno-alta/turno-alta.component';
 import { TurnoModificarComponent } from './features/turnos/components/turno-modificar/turno-modificar.component';
 import { SearchBarComponent } from './shared/components/search-bar/search-bar.component';
+import { RegisterFormComponent } from './features/register/components/register-form/register-form.component';
+import { RegisterPageComponent } from './features/register/pages/register-page/register-page.component';
+import { LoginFormComponent } from './features/login/components/login-form/login-form.component';
+import { LoginPageComponent } from './features/login/pages/login-page/login-page.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +49,11 @@ import { SearchBarComponent } from './shared/components/search-bar/search-bar.co
     HomeButtonComponent,
     TurnoAltaComponent,
     TurnoModificarComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    RegisterFormComponent,
+    RegisterPageComponent,
+    LoginFormComponent,
+    LoginPageComponent
   ],
   imports: [
     BrowserModule,

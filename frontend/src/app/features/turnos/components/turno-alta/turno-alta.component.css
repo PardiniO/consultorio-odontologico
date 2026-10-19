@@ -7,9 +7,10 @@
     width: 50vw;
     height: 65vh;
     padding: 10px;
-    background-color: rgb(226, 226, 226);
+    background-color: rgba(226, 226, 226, 0.093);
+    backdrop-filter: blur(10px);
     border-radius: 10px;
-    border: 2px solid gray;
+    border: 2px solid rgba(128, 128, 128, 0.436);
 }
 
 .form__field {
@@ -37,7 +38,7 @@
     font-size: 0.95rem;
 }
 
-.form__input, .form__button, select, .input-date {
+.form__input, .form__button, select, .input-date, .input-text {
     padding: 10px;
     border-radius: 10px;
     border: 2px solid gray;
@@ -46,6 +47,13 @@
 
 .form__input, select {
     width: 75%;
+    background-color: rgba(226, 226, 226, 0.408);
+    backdrop-filter: blur(10px);
+}
+
+.input-text {
+    background-color: rgba(226, 226, 226, 0.408);
+    backdrop-filter: blur(10px);
 }
 
 .form__button:hover {

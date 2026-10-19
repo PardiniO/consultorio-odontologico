@@ -1,3 +1,7 @@
+:host {
+    animation: appear 0.25s ease-in-out;
+}
+
 .turno-card {
     display: flex;
     flex-direction: column;
@@ -7,7 +11,7 @@
     width: 20vw;
     height: 30vh;
     border-radius: 11px;
-    border: 2px solid gray;
+    box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.225);
     transition: all 0.25s;
 }
 
@@ -32,9 +36,9 @@
     height: 35%;
     padding: 10px;
     gap: 10px;
-    background: rgb(207, 207, 207);
     border-radius: 10px 10px 0 0;
-    border-bottom: 2px solid gray;
+    background: rgba(207, 207, 207, 0.438);
+    backdrop-filter: blur(10px);
 }
 
 .turno-card__body {
@@ -50,7 +54,9 @@
     flex-grow: 1;
     gap: 10px;
     padding: 10px;
-    background: rgb(245, 245, 245);
+    border-radius: 0 0 10px 10px;
+    background: rgba(245, 245, 245, 0.123);
+    backdrop-filter: blur(10px);
     border-radius: 0 0 10px 10px;
 }
 
@@ -73,15 +79,18 @@ p {
 }
 
 .pendiente {
-    background-color: rgb(247, 252, 150);
+    background-color: rgba(247, 252, 150, 0.473);
+    backdrop-filter: blur(10px);
 }
 
 .confirmado {
-    background-color: rgb(150, 252, 150);
+    background-color: rgba(150, 252, 150, 0.427);
+    backdrop-filter: blur(10px);
 }
 
 .cancelado {
-    background-color: rgb(252, 150, 150);
+    background-color: rgba(252, 150, 150, 0.472);
+    backdrop-filter: blur(10px);
 }
 
 .delete-button {

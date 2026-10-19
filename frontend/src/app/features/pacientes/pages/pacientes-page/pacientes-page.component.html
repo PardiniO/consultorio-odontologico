@@ -7,7 +7,17 @@
 </app-header>
 <div class="content">
     <div class="content__patients-manager">
+<<<<<<< HEAD
         <div class="content__patients-section">
+=======
+        <div class="content__search-bar" *ngIf="!panelModificarPacienteVisible && !panelCrearPacienteVisible">
+            <app-home-button></app-home-button>
+            <input #q type="search" placeholder="Buscar paciente..." (keyup.enter)="getByName(q.value)">
+            <button (click)="getByName(q.value)">Buscar</button>
+            <button class="create-btn" (click)="togglePannel2()">+</button>
+        </div>
+        <div class="content__patients-section" [ngStyle]="{ 'height' : panelCrearPacienteVisible ? '90vh' : '79vh' }">
+>>>>>>> origin/mejoras-visuales-y-prototipo-login
             <div class="content__patients" *ngIf="!panelModificarPacienteVisible && !panelCrearPacienteVisible">
                 <app-paciente-card *ngFor="let p of pacientes" [paciente]="p" (modificar)="selectPatient($event)"
                     (eliminar)="remove($event)"></app-paciente-card>
@@ -16,8 +26,10 @@
                 <app-paciente-modificar *ngIf="pacienteSeleccionado" [pacienteSeleccionado]="pacienteSeleccionado"
                     (salir)="togglePannel()" (modificar)="update($event)"></app-paciente-modificar>
             </div>
-            <app-paciente-alta *ngIf="panelCrearPacienteVisible" (salir)="togglePannel2()"
+            <div class="content__create-patients" *ngIf="panelCrearPacienteVisible">
+                <app-paciente-alta *ngIf="panelCrearPacienteVisible" (salir)="togglePannel2()"
                 (crear)="create($event)"></app-paciente-alta>
+            </div>
         </div>
     </div>
 </div>

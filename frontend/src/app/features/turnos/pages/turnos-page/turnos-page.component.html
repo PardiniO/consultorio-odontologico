@@ -31,14 +31,26 @@
 
 <div class="content">
     <div class="content__turnos-manager">
+<<<<<<< HEAD
         <div class="content__turnos-section">
+=======
+        <div class="content__search-bar" *ngIf="!panelModificarTurnoVisible && !panelCrearTurnoVisible">
+            <app-home-button></app-home-button>
+            <input #q type="number" placeholder="Buscar turno..." (keyup.enter)="getById(q.value)">
+            <button (click)="getById(q.value)">Buscar</button>
+            <button class="create-btn" (click)="togglePannel2()">+</button>
+        </div>
+        <div class="content__turnos-section" [ngStyle]="{ 'height' : panelCrearTurnoVisible ? '90vh' : '79vh' }">
+>>>>>>> origin/mejoras-visuales-y-prototipo-login
             <div class="content__turnos" *ngIf="!panelModificarTurnoVisible && !panelCrearTurnoVisible">
                 <app-turno-card *ngFor="let t of turnos" [turno]="t" (modificar)="selectTurno($event)" (eliminar)="remove($event)"></app-turno-card>
             </div>
             <div class="content__modify-turno" *ngIf="panelModificarTurnoVisible">
                 <app-turno-modificar *ngIf="turnoSeleccionado" [turnoSeleccionado]="turnoSeleccionado" (modificar)="update($event)" (salir)="togglePannel()"></app-turno-modificar>
             </div>
-            <app-turno-alta *ngIf="panelCrearTurnoVisible" (salir)="togglePannel2()" (crear)="create($event)"></app-turno-alta>
+            <div class="content__create-turno" *ngIf="panelCrearTurnoVisible">
+                <app-turno-alta *ngIf="panelCrearTurnoVisible" (salir)="togglePannel2()" (crear)="create($event)"></app-turno-alta>
+            </div>
         </div>
     </div>
 </div>

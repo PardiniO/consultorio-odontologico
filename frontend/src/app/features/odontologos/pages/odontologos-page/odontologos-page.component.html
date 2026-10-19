@@ -9,14 +9,26 @@
     </app-header>
     <div class="content">
         <div class="content__doctors-manager">
+<<<<<<< HEAD
             <div class="content__doctors-section">
+=======
+            <div class="content__search-bar" *ngIf="!panelModificarDoctorVisible && !panelCrearDoctorVisible">
+                <app-home-button></app-home-button>
+                <input #q type="search" placeholder="Buscar doctor..." (keyup.enter)="getByName(q.value)">
+                <button (click)="getByName(q.value)">Buscar</button>
+                <button class="create-btn" (click)="togglePannel2()">+</button>
+            </div>
+            <div class="content__doctors-section" [ngStyle]="{ 'height' : panelCrearDoctorVisible ? '90vh' : '80vh' }">
+>>>>>>> origin/mejoras-visuales-y-prototipo-login
                 <div class="content__doctors" *ngIf="!panelModificarDoctorVisible && !panelCrearDoctorVisible">
                     <app-odontologo-card *ngFor="let d of doctores" [doctor]="d" (modificar)="selectDoctor($event)" (eliminar)="remove($event)"></app-odontologo-card>
                 </div>
                 <div class="content__modify-doctor" *ngIf="panelModificarDoctorVisible">
                     <app-odontologo-modificar *ngIf="doctorSeleccionado" [doctorSeleccionado]="doctorSeleccionado" (salir)="togglePannel()" (modificar)="update($event)"></app-odontologo-modificar>
                 </div>
-                <app-odontologo-alta *ngIf="panelCrearDoctorVisible" (salir)="togglePannel2()" (crearDoctor)="create($event)"></app-odontologo-alta>
+                <div class="content__create-doctor" *ngIf="panelCrearDoctorVisible">
+                    <app-odontologo-alta *ngIf="panelCrearDoctorVisible" (salir)="togglePannel2()" (crearDoctor)="create($event)"></app-odontologo-alta>
+                </div>
             </div>
         </div>
     </div>
