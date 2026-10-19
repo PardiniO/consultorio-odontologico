@@ -15,7 +15,7 @@ import { HomePageComponent } from './features/home/pages/home-page/home-page.com
 import { RouterLink, RouterModule } from '@angular/router';
 import { OdontologoCardComponent } from './features/odontologos/components/odontologo-card/odontologo-card.component';
 import { OdontologoModificarComponent } from './features/odontologos/components/odontologo-modificar/odontologo-modificar.component';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { PacienteCardComponent } from './features/pacientes/components/paciente-card/paciente-card.component';
 import { PacienteModificarComponent } from './features/pacientes/components/paciente-modificar/paciente-modificar.component';
 import { PacienteAltaComponent } from './features/pacientes/components/paciente-alta/paciente-alta.component';
