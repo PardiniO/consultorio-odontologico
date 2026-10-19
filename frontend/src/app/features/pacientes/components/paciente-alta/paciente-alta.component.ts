@@ -5,7 +5,7 @@ import { Paciente } from '../../../../core/models/paciente.interface';
 @Component({
   selector: 'app-paciente-alta',
   templateUrl: './paciente-alta.component.html',
-  styleUrl: './paciente-alta.component.css'
+  styleUrls: ['./paciente-alta.component.css']
 })
 export class PacienteAltaComponent {
   @Output() salir = new EventEmitter<void>();

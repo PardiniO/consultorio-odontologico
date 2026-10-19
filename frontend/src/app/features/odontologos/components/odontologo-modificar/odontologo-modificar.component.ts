@@ -4,7 +4,7 @@ import { Doctor } from '../../../../core/models/doctor.interface';
 @Component({
   selector: 'app-odontologo-modificar',
   templateUrl: './odontologo-modificar.component.html',
-  styleUrl: './odontologo-modificar.component.css'
+  styleUrls: ['./odontologo-modificar.component.css']
 })
 export class OdontologoModificarComponent {
   @Input({required: true}) doctorSeleccionado!: Doctor;

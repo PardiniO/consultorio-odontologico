@@ -6,7 +6,7 @@ import { DoctoresService } from '../../../../core/services/doctores.service';
 @Component({
   selector: 'app-odontologos-page',
   templateUrl: './odontologos-page.component.html',
-  styleUrl: './odontologos-page.component.css'
+  styleUrls: ['./odontologos-page.component.css']
 })
 export class OdontologosPageComponent implements OnInit {
   doctores: Doctor[] = [];

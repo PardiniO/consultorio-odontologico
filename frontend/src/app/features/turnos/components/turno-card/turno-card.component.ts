@@ -4,7 +4,7 @@ import { Turno } from '../../../../core/models/turno.interface';
 @Component({
   selector: 'app-turno-card',
   templateUrl: './turno-card.component.html',
-  styleUrl: './turno-card.component.css'
+  styleUrls: ['./turno-card.component.css']
 })
 export class TurnoCardComponent {
   @Input({required: true}) turno!: Turno;

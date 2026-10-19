@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-turnos-page',
   templateUrl: './turnos-page.component.html',
-  styleUrl: './turnos-page.component.css'
+  styleUrls: ['./turnos-page.component.css']
 })
 export class TurnosPageComponent implements OnInit {
   turnos: Turno[] = [];

@@ -4,7 +4,7 @@ import { Doctor } from '../../../../core/models/doctor.interface';
 @Component({
   selector: 'app-odontologo-card',
   templateUrl: './odontologo-card.component.html',
-  styleUrl: './odontologo-card.component.css'
+  styleUrls: ['./odontologo-card.component.css']
 })
 export class OdontologoCardComponent {
   @Input({required: true}) doctor!: Doctor;

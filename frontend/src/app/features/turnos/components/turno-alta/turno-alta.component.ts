@@ -9,7 +9,7 @@ import { Doctor } from '../../../../core/models/doctor.interface';
 @Component({
   selector: 'app-turno-alta',
   templateUrl: './turno-alta.component.html',
-  styleUrl: './turno-alta.component.css'
+  styleUrls: ['./turno-alta.component.css']
 })
 export class TurnoAltaComponent implements OnInit {
   private pacientesService = inject(PacientesService);

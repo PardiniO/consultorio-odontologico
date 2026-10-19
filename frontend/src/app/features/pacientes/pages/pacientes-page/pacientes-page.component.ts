@@ -6,7 +6,7 @@ import { PacientesService } from '../../../../core/services/pacientes.service';
 @Component({
   selector: 'app-pacientes-page',
   templateUrl: './pacientes-page.component.html',
-  styleUrl: './pacientes-page.component.css'
+  styleUrls: ['./pacientes-page.component.css']
 })
 export class PacientesPageComponent implements OnInit {
   pacientes: Paciente[] = [];

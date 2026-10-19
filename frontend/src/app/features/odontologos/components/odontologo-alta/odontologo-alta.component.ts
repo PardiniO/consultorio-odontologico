@@ -5,7 +5,7 @@ import { DoctoresService } from '../../../../core/services/doctores.service';
 @Component({
   selector: 'app-odontologo-alta',
   templateUrl: './odontologo-alta.component.html',
-  styleUrl: './odontologo-alta.component.css'
+  styleUrls: ['./odontologo-alta.component.css']
 })
 export class OdontologoAltaComponent {
   private doctoresService = inject(DoctoresService);

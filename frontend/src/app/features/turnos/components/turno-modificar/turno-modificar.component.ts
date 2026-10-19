@@ -4,7 +4,7 @@ import { Turno } from '../../../../core/models/turno.interface';
 @Component({
   selector: 'app-turno-modificar',
   templateUrl: './turno-modificar.component.html',
-  styleUrl: './turno-modificar.component.css'
+  styleUrls: ['./turno-modificar.component.css']
 })
 export class TurnoModificarComponent {
   @Input({ required: true }) turnoSeleccionado!: Turno;
