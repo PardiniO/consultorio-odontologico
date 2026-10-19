@@ -38,6 +38,8 @@ export class PacientesPageComponent implements OnInit {
     const pacienteMOD: Omit<Paciente, 'id_paciente'> = {
       nombre: p.nombre,
       apellido: p.apellido,
+      usuario: p.usuario,
+      contraseña: p.contraseña,
       fecha_nacimiento: p.fecha_nacimiento
     };
 

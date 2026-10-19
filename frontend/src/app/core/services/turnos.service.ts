@@ -13,7 +13,7 @@ export class TurnosService {
 
     private headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2wiOiJFbmRvZG9uY2lzdGEiLCJlc0FkbWluIjoxLCJpYXQiOjE3OTI0MTgyNTMsImV4cCI6MTc5MjQyNTQ1M30.E6LnwNLzz_VRABZD9zvQB70ZlhY-gqqtnmJjhxaXj4c'
+      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2wiOiJFbmRvZG9uY2lzdGEiLCJlc0FkbWluIjoxLCJpYXQiOjE3OTI0MjEzMTUsImV4cCI6MTc5MjQyODUxNX0.VW2FTc0oePZZjHchIqHuvCyUaVaAa2U6HndNHgFwrB8'
     });
 
     getAll(): Observable<Turno[]> {
