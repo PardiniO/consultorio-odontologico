@@ -2,17 +2,9 @@
     display: flex;
     flex-direction: row;
     width: 100%;
-    flex-grow: 1;
-    /* background-color: red; */
-}
-
-.content__create-btn {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: flex-end;
-    text-align: center;
-    width: 75%;
+    height: 100vh;
+    background: url('../../../../../../public/bg-3.jpg');
+    background-position: center;
 }
 
 .content__doctors-manager {
@@ -22,17 +14,6 @@
     align-items: center;
     text-align: center;
     width: 100%;
-    flex-grow: 1;
-    background-color: rgb(219, 218, 218);
-}
-
-.content__doctors-section {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    min-height: 80vh;
     flex-grow: 1;
 }
 
@@ -46,7 +27,17 @@
     height: 10%;
     gap: 10px;
     padding: 0 10px;
-    background-color: rgb(206, 206, 206);
+    background-color: rgba(206, 206, 206, 0.339);
+    backdrop-filter: blur(10px);
+}
+
+.content__doctors-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex-grow: 1;
 }
 
 .content__doctors {
@@ -59,11 +50,10 @@
     overflow: auto;
     overflow-x: hidden;
     width: 100%;
-    height: 80vh;
+    height: 100%;
     flex-grow: 1;
     gap: 10px;
     padding: 10px 0;
-    background: url('../../../../../../public/bg-3.jpg');
 }
 
 .content__modify-doctor {
@@ -74,8 +64,6 @@
     text-align: center;
     min-height: 80vh;
     flex-grow: 1;
-    background-color: rgb(189, 189, 189);
-    /* background-color: yellow; */
 }
 
 .content__create-doctor {
@@ -85,7 +73,7 @@
     align-items: center;
     text-align: center;
     width: 100%;
-    height: 90vh;
+    height: 100%;
     flex-grow: 1;
     background: url('../../../../../../public/bg-4.jpg');
     background-position: center;

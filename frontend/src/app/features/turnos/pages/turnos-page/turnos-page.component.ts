@@ -36,7 +36,7 @@ export class TurnosPageComponent implements OnInit, OnDestroy {
   }
 
   update(t: Turno): void {
-    const turnoMOD: Omit<Turno, 'id_turno'> = {
+    const turnoMOD: Omit<Turno, 'id'> = {
       horario: t.horario,
       sala: t.sala,
       razon: t.razon,
@@ -46,14 +46,30 @@ export class TurnosPageComponent implements OnInit, OnDestroy {
       id_doctor: t.id_doctor
     };
 
-    const sub = this.turnosService.update(t.id_turno, turnoMOD).subscribe({
-      next: () => this.load(),
-      error: (e) => console.error('Error al actualizar turno:', e)
+    this.turnosService.update(t.id, turnoMOD).subscribe({
+      next: () => {
+        this.load();
+      },
+      error: (e) => {
+        console.error(e);
+      }
     });
-    this.turnosSub.add(sub);
   }
 
-  create(t: Omit<Turno, 'id_turno'>): void {
+  getById(id: string): void {
+    let id_: number = Number(id);
+
+    this.turnosService.getById(id_).subscribe({
+      next: (data) => {
+        this.turnos = [data];
+      },
+      error: (e) => {
+        console.error(e);
+      }
+    });
+  }
+
+  create(t: Omit<Turno, 'id'>): void {
     const sub = this.turnosService.create(t).subscribe({
       next: () => {
         this.load();

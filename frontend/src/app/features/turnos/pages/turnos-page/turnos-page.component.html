@@ -70,7 +70,9 @@
                     (crear)="create($event)">
                 </app-turno-alta>
             </div>
-            
+            <div class="content__create-turno" *ngIf="panelCrearTurnoVisible">
+                <app-turno-alta *ngIf="panelCrearTurnoVisible" (salir)="togglePannel2()" (crear)="create($event)"></app-turno-alta>
+            </div>
         </div>
     </div>
 </div>

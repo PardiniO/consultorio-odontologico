@@ -40,6 +40,8 @@ export class PacientesPageComponent implements OnInit, OnDestroy {
     const pacienteMOD: Omit<Paciente, 'id_paciente'> = {
       nombre: p.nombre,
       apellido: p.apellido,
+      usuario: p.usuario,
+      contrasena: p.contrasena,
       fecha_nacimiento: p.fecha_nacimiento
     };
 
@@ -54,8 +56,8 @@ export class PacientesPageComponent implements OnInit, OnDestroy {
     this.pacientesSub.add(sub);
   }
 
-  create(p: Omit<Paciente, 'id_paciente'>): void {
-    const sub = this.pacientesService.create(p).subscribe({
+  register(p: Omit<Paciente, 'id_paciente'>): void {
+    const sub = this.pacientesService.register(p).subscribe({
       next: () => {
         this.load();
         this.toggleCrearPanel();

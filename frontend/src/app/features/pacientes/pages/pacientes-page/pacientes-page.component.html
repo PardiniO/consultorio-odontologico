@@ -37,6 +37,10 @@
                     (crear)="create($event)">
                 </app-paciente-alta>
             </div>
+            <div class="content__create-patients" *ngIf="panelCrearPacienteVisible">
+                <app-paciente-alta *ngIf="panelCrearPacienteVisible" (salir)="togglePannel2()"
+                (crear)="register($event)"></app-paciente-alta>
+            </div>
         </div>
     </div>
 </div>

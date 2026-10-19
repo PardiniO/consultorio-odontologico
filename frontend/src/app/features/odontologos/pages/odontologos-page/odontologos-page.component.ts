@@ -39,6 +39,8 @@ export class OdontologosPageComponent implements OnInit, OnDestroy {
     const doctorMOD: Omit<Doctor, 'id_doctor'> = {
       nombre: d.nombre,
       apellido: d.apellido,
+      usuario: d.usuario,
+      contrasena: d.contrasena,
       rol: d.rol,
       es_admin: d.es_admin
     };
@@ -54,8 +56,8 @@ export class OdontologosPageComponent implements OnInit, OnDestroy {
     this.doctoresSub.add(sub);
   }
 
-  create(d: Omit<Doctor, 'id_doctor'>): void {
-    const sub = this.doctoresService.create(d).subscribe({
+  register(d: Omit<Doctor, 'id_doctor'>): void {
+    const sub = this.doctoresService.register(d).subscribe({
       next: () => {
         this.load();
         this.toggleCrearPanel();

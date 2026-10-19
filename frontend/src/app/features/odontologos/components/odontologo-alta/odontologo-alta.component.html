@@ -9,6 +9,14 @@
         <input id="apellido" type="text" placeholder="Ej: Doe" class="form__input" [(ngModel)]="doctor.apellido">
     </div>
     <div class="form__field">
+        <label for="user" class="form__label">Usuario:</label>
+        <input id="user" type="text" placeholder="Ej: Usuario123" class="form__input" [(ngModel)]="doctor.usuario">
+    </div>
+    <div class="form__field">
+        <label for="password" class="form__label">Contraseña:</label>
+        <input id="password" type="text" placeholder="Ej: 12345678" class="form__input" [(ngModel)]="doctor.contrasena">
+    </div>
+    <div class="form__field">
         <label for="speciality">Especialidad:</label>
         <select name="speciality" id="speciality" [(ngModel)]="doctor.rol">
             <option value="Endodoncista">Endodoncista</option>

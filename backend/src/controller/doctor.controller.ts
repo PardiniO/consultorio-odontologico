@@ -15,7 +15,7 @@ function isDoctorInput(body: any): body is DoctorInput {
         typeof body?.apellido === 'string' && body.apellido.trim() !== '' &&
         typeof body?.rol === 'string' && (body.rol === 'Endodoncista' || body.sala === 'Ortodoncista') &&
         typeof body?.usuario === 'string' && body.usuario.trim() !== '' &&
-        typeof body?.contraseña === 'string' && body.contraseña.trim() !== '' &&
+        typeof body?.contrasena === 'string' && body.contrasena.trim() !== '' &&
         typeof body?.es_admin === 'boolean'
     );
 }
@@ -63,7 +63,7 @@ export const getWithFilters = async (req: Request, res: Response) =>{
     const apellido = req.query.apellido as string | undefined;
     const rol = req.query.rol as 'Endodoncista' | 'Ortodoncista' | undefined;
     const usuario = req.query.usuario as string |  undefined;
-    const contraseña = req.query.contraseña as string | undefined;
+    const contrasena = req.query.contrasena as string | undefined;
     const es_admin =
     req.query.es_admin === 'true' ? true :
     req.query.es_admin === 'false' ? false :
@@ -75,7 +75,7 @@ export const getWithFilters = async (req: Request, res: Response) =>{
         apellido,
         rol,
         usuario,
-        contraseña,
+        contrasena,
         es_admin
     );
     if (!doctor) {

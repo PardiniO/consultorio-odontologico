@@ -16,7 +16,7 @@ export class TurnoAltaComponent implements OnInit {
   private doctoresService = inject(DoctoresService);
 
   @Output() salir = new EventEmitter<void>();
-  @Output() crear = new EventEmitter<Omit<Turno, 'id_turno'>>();
+  @Output() crear = new EventEmitter<Omit<Turno, 'id'>>();
 
   pacientes: Paciente[] = [];
   doctores: Doctor[] = [];
@@ -41,7 +41,7 @@ export class TurnoAltaComponent implements OnInit {
     });
   }
 
-  turno: Omit<Turno, 'id_turno'> = {
+  turno: Omit<Turno, 'id'> = {
     horario: '',
     sala: 'A17',
     razon: '',

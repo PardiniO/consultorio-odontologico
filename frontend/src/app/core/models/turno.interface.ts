@@ -1,5 +1,5 @@
 export interface Turno {
-    id_turno: number;
+    id: number;
     horario: string;
     sala: 'A17' | 'A19';
     razon: string;

@@ -10,10 +10,14 @@ import { FiltroTurnos } from "../models/filtro-turnos";
 export class TurnosService {
   private http = inject(HttpClient);
   private apiUrl: string = 'http://localhost:3000/api/turnos';
-  
+
+  private http = inject(HttpClient);
+
+  private token: string = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2wiOiJFbmRvZG9uY2lzdGEiLCJlc0FkbWluIjoxLCJpYXQiOjE3OTI0NDIzMjEsImV4cCI6MTc5MjQ0OTUyMX0.YXhajXlgBtb6js-cvYr6awINgUtw2ZHjwomHfFt_trE';
+
   private headers = new HttpHeaders({
     'Content-Type': 'application/json',
-    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2wiOiJFbmRvZG9uY2lzdGEiLCJlc0FkbWluIjoxLCJpYXQiOjE3OTI0NDM2MjcsImV4cCI6MTc5MjQ1MDgyN30.kd1n0w5DPr_-OtQeo3siTCYt8jJBYNqupRLKJp9LFI4'
+    'Authorization': `Bearer ${this.token}`
   });
 
   getAll(): Observable<Turno[]> {
@@ -21,21 +25,21 @@ export class TurnosService {
   }
 
   getById(id: number): Observable<Turno> {
-    return this.http.get<Turno>(`${this.apiUrl}/${id}`);
+    return this.http.get<Turno>(`${this.apiUrl}/${id}`, { headers: this.headers });
   }
 
-  create(turno: Omit<Turno, 'id_turno'>): Observable<Turno> {
-    return this.http.post<Turno>(this.apiUrl, turno);
+  create(turno: Omit<Turno, 'id'>): Observable<Turno> {
+    return this.http.post<Turno>(this.apiUrl, turno, { headers: this.headers });
   }
 
-  update(id: number, turno: Omit<Turno, 'id_turno'>): Observable<Turno> {
-    return this.http.put<Turno>(`${this.apiUrl}/${id}`, turno);
+  update(id: number, turno: Omit<Turno, 'id'>): Observable<Turno> {
+    return this.http.put<Turno>(`${this.apiUrl}/${id}`, turno, { headers: this.headers });
   }
 
   remove(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`, { headers: this.headers });
   }
-
+    
   getTurnos(searchTerm: string): Observable<string[]> {
     const params = new HttpParams().set('q', searchTerm);
     return this.http.get<string[]>(this.apiUrl, { params });

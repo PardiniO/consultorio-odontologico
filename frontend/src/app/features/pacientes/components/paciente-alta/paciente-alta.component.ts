@@ -14,6 +14,8 @@ export class PacienteAltaComponent {
   paciente: Omit<Paciente, 'id_paciente'> = {
     nombre: '',
     apellido: '',
+    usuario: '',
+    contrasena: '',
     fecha_nacimiento: '2026-10-01'
   };
 

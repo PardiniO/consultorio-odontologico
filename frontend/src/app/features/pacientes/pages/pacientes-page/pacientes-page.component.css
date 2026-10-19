@@ -2,7 +2,10 @@
     display: flex;
     flex-direction: row;
     width: 100%;
-    flex-grow: 1;
+    height: 100vh;
+    background: url('../../../../../../public/bg-6.jpg');
+    background-attachment: fixed;
+    background-position: center;
 }
 
 .content__patients-manager {
@@ -13,7 +16,6 @@
     text-align: center;
     width: 100%;
     flex-grow: 1;
-    background-color: white;
 }
 
 .content__search-bar {
@@ -23,9 +25,11 @@
     align-items: center;
     text-align: center;
     width: 100%;
+    height: 10%;
     gap: 10px;
     padding: 10px 0;
-    background-color: rgb(219, 218, 218);
+    background-color: rgba(219, 218, 218, 0.273);
+    backdrop-filter: blur(10px);
 }
 
 .content__patients {
@@ -38,13 +42,10 @@
     overflow: auto;
     overflow-x: hidden;
     width: 100%;
-    height: 79vh;
+    height: 100%;
     gap: 15px;
     padding: 20px 0;
     flex-grow: 1;
-    background: url('../../../../../../public/bg-6.jpg');
-    background-attachment: fixed;
-    background-position: center;
 }
 
 .content__create-patients {
@@ -54,7 +55,7 @@
     align-items: center;
     text-align: center;
     width: 100%;
-    height: 90vh;
+    height: 100%;
     flex-grow: 1;
     background: url('../../../../../../public/bg-4.jpg');
     background-position: center;
@@ -66,7 +67,6 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 79vh;
     flex-grow: 1;
 }
 
