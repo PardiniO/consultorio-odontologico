@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { Paciente } from '../../../../core/models/paciente.interface';
 import { Subscription } from 'rxjs';
 import { PacientesService } from '../../../../core/services/pacientes.service';
@@ -8,12 +8,12 @@ import { PacientesService } from '../../../../core/services/pacientes.service';
   templateUrl: './pacientes-page.component.html',
   styleUrls: ['./pacientes-page.component.css']
 })
-export class PacientesPageComponent implements OnInit {
+export class PacientesPageComponent implements OnInit, OnDestroy {
   pacientes: Paciente[] = [];
   pacienteSeleccionado: Paciente | null = null;
 
 
-  private pacientesSub!: Subscription;
+  private pacientesSub: Subscription = new Subscription();
   private pacientesService = inject(PacientesService);
 
   panelModificarPacienteVisible: boolean = false;
@@ -24,15 +24,16 @@ export class PacientesPageComponent implements OnInit {
   }
 
   load(): void {
-    this.pacientesSub = this.pacientesService.getAll().subscribe({
+    const sub = this.pacientesService.getAll().subscribe({
       next: (data) => {
         this.pacientes = data;
         console.log(this.pacientes);
       },
       error: (e) => {
-        console.error(e);
+        console.error('Error al cargar pacientes:', e);
       }
     });
+    this.pacientesSub.add(sub);
   }
 
   update(p: Paciente): void {
@@ -42,95 +43,72 @@ export class PacientesPageComponent implements OnInit {
       fecha_nacimiento: p.fecha_nacimiento
     };
 
-    this.pacientesService.update(p.id_paciente, pacienteMOD).subscribe({
+    const sub = this.pacientesService.update(p.id_paciente, pacienteMOD).subscribe({
       next: () => {
         this.load();
       },
       error: (e) => {
-        console.error(e);
+        console.error('Error al actualizar:', e);
       }
     });
-  }
-
-  getById(id: string): void {
-    let id_: number = Number(id);
-
-    this.pacientesService.getById(id_).subscribe({
-      next: (data) => {
-        this.pacientes = [data];
-      },
-      error: (e) => {
-        console.error(e);
-      }
-    });
-  }
-
-  getByName(name: string): void {
-    if (name === '') {
-      this.load();
-
-    } else {
-      this.pacientesService.getByName(name).subscribe({
-        next: (data) => {
-          this.pacientes = [data];
-        },
-        error: (e) => {
-          console.error(e);
-        }
-      });
-    }
+    this.pacientesSub.add(sub);
   }
 
   create(p: Omit<Paciente, 'id_paciente'>): void {
-    this.pacientesService.create(p).subscribe({
+    const sub = this.pacientesService.create(p).subscribe({
       next: () => {
         this.load();
-        this.togglePannel2();
+        this.toggleCrearPanel();
       },
       error: (e) => {
-        console.error(e);
+        console.error('Error al crear:', e);
       }
     });
+    this.pacientesSub.add(sub);
   }
-
+  
   remove(id: number): void {
     console.log(id);
-    this.pacientesService.remove(id).subscribe({
+    const sub = this.pacientesService.remove(id).subscribe({
       next: () => {
         this.load();
       },
       error: (e) => {
-        console.error(e);
-      }
+        console.error('Error al eliminar', e);
+      }  
     });
-  }
-
+    this.pacientesSub.add(sub);
+  }  
+  
   selectPatient(value: Paciente): void {
-    this.togglePannel();
-
     this.pacienteSeleccionado = value;
-    console.log(this.pacienteSeleccionado);
+    this.toggleModificarPanel();
   }
-
-  togglePannel(): void {
+  
+  toggleModificarPanel(): void {
     this.panelModificarPacienteVisible = !this.panelModificarPacienteVisible;
   }
 
-  togglePannel2(): void {
+  toggleCrearPanel(): void {
     this.panelCrearPacienteVisible = !this.panelCrearPacienteVisible;
-  }
+  }  
   
   handleSearch(term: string): void {
-    this.pacientesService.getPacientes(term).subscribe({
+    if (!term.trim()) {
+      this.load();
+      return;
+    }
+
+    const sub = this.pacientesService.getPacientes(term).subscribe({
       next: (data) => {
-        /** No sé qué iría acá... */
+        this.pacientes = Array.isArray(data) ? data : [data];
       },
       error: (err) => {
-        console.error(err);
+        console.error('Error de búsqueda:', err);
       },
     });
+    this.pacientesSub.add(sub);
   }
-
 
   ngOnDestroy(): void {
     this.pacientesSub.unsubscribe();

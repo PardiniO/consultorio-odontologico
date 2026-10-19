@@ -9,8 +9,7 @@ export class SearchBarComponent {
   @Input() placeholderText: string = 'Buscar...';
   @Output() searchEvent = new EventEmitter<string>();
 
-  onSearch(event: Event): void {
-    const element = event.target as HTMLInputElement;
-    this.searchEvent.emit(element.value);
+  onSearch(searchTerm: string): void {
+    this.searchEvent.emit(searchTerm);
   }
 }

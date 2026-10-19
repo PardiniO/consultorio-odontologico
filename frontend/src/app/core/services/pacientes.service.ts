@@ -19,9 +19,9 @@ export class PacientesService {
     return this.http.get<Paciente>(`${this.apiUrl}/${id}`);
   }
 
-  getPacientes(searchTerm: string): Observable<string[]> {
+  getPacientes(searchTerm: string): Observable<Paciente[]> {
     const params = new HttpParams().set('q', searchTerm);
-    return this.http.get<string[]>(this.apiUrl, { params });
+    return this.http.get<Paciente[]>(this.apiUrl, { params });
   }
 
   getByName(name: string): Observable<Paciente> {

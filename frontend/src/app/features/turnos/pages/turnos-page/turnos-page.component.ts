@@ -1,4 +1,5 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy } from '@angular/core';
+import { FiltroTurnos } from "../../../../core/models/filtro-turnos";
 import { Turno } from '../../../../core/models/turno.interface';
 import { TurnosService } from '../../../../core/services/turnos.service';
 import { Subscription } from 'rxjs';
@@ -8,12 +9,13 @@ import { Subscription } from 'rxjs';
   templateUrl: './turnos-page.component.html',
   styleUrls: ['./turnos-page.component.css']
 })
-export class TurnosPageComponent implements OnInit {
+export class TurnosPageComponent implements OnInit, OnDestroy {
   turnos: Turno[] = [];
   turnoSeleccionado: Turno | null = null;
-  turnosFiltrados: string[] = [];
 
-  private turnosSub!: Subscription;
+  terminoBusqueda: string = '';
+
+  private turnosSub: Subscription = new Subscription();
   private turnosService = inject(TurnosService);
 
   panelModificarTurnoVisible: boolean = false;
@@ -24,15 +26,13 @@ export class TurnosPageComponent implements OnInit {
   }
 
   load(): void {
-    this.turnosSub = this.turnosService.getAll().subscribe({
+    const sub = this.turnosService.getAll().subscribe({
       next: (data) => {
         this.turnos = data;
-        console.log(this.turnos);
       },
-      error: (e) => {
-        console.error(e);
-      }
+      error: (e) => console.error('Error al cargar turnos:', e)
     });
+    this.turnosSub.add(sub);
   }
 
   update(t: Turno): void {
@@ -46,76 +46,66 @@ export class TurnosPageComponent implements OnInit {
       id_doctor: t.id_doctor
     };
 
-    this.turnosService.update(t.id_turno, turnoMOD).subscribe({
-      next: () => {
-        this.load();
-      },
-      error: (e) => {
-        console.error(e);
-      }
+    const sub = this.turnosService.update(t.id_turno, turnoMOD).subscribe({
+      next: () => this.load(),
+      error: (e) => console.error('Error al actualizar turno:', e)
     });
-  }
-
-  getById(id: string): void {
-    let id_: number = Number(id);
-
-    this.turnosService.getById(id_).subscribe({
-      next: (data) => {
-        this.turnos = [data];
-      },
-      error: (e) => {
-        console.error(e);
-      }
-    });
+    this.turnosSub.add(sub);
   }
 
   create(t: Omit<Turno, 'id_turno'>): void {
-    this.turnosService.create(t).subscribe({
+    const sub = this.turnosService.create(t).subscribe({
       next: () => {
         this.load();
-        this.togglePannel2();
+        this.toggleCrearPanel();
       },
-      error: (e) => {
-        console.error(e);
-      }
+      error: (e) => console.error('Error al crear turno:', e)
     });
+    this.turnosSub.add(sub);
   }
 
   remove(id: number): void {
-    console.log(id);
-    this.turnosService.remove(id).subscribe({
-      next: () => {
-        this.load();
-      },
-      error: (e) => {
-        console.error(e);
-      }
+    const sub = this.turnosService.remove(id).subscribe({
+      next: () => this.load(),
+      error: (e) => console.error('Error al eliminar turno:', e)
     });
+    this.turnosSub.add(sub);
   }
 
   selectTurno(value: Turno): void {
-    this.togglePannel();
-
     this.turnoSeleccionado = value;
-    console.log(this.turnoSeleccionado);
+    this.toggleModificarPanel();
   }
   
-  handleSearch(term: string): void {
-    this.turnosService.getTurnos(term).subscribe({
-      next: (data) => {
-        this.turnosFiltrados = data;
-      },
-      error: (err) => {
-        console.error(err);
-      },
-    });
+  handleSearch(term: string, estado: string, sala: string, desde: string, hasta: string): void {
+    this.terminoBusqueda = term;
+    this.aplicarFiltros(estado, sala, desde, hasta);
   }
 
-  togglePannel(): void {
+  aplicarFiltros(estado: string, sala: string, desde: string, hasta: string): void {
+    const queryParams: FiltroTurnos = {};
+    
+    if (this.terminoBusqueda.trim()) queryParams.termino = this.terminoBusqueda;
+    if (estado) queryParams.estado = estado;
+    if (sala) queryParams.sala = sala;
+    if (desde) queryParams.fechaDesde = desde;
+    if (hasta) queryParams.fechaHasta = hasta;
+    
+    const sub = this.turnosService.getTurnosFiltrados(queryParams).subscribe({
+      next: (data: Turno[]) => {
+        this.turnos = data;
+      },  
+      error: (err) => {
+        console.error('Error al filtrar turnos:', err);
+      }  
+    });  
+    this.turnosSub.add(sub);
+  }    
+  toggleModificarPanel(): void {
     this.panelModificarTurnoVisible = !this.panelModificarTurnoVisible;
   }
 
-  togglePannel2(): void {
+  toggleCrearPanel(): void {
     this.panelCrearTurnoVisible = !this.panelCrearTurnoVisible;
   }
 

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { Doctor } from '../../../../core/models/doctor.interface';
 import { Subscription } from 'rxjs';
 import { DoctoresService } from '../../../../core/services/doctores.service';
@@ -8,11 +8,11 @@ import { DoctoresService } from '../../../../core/services/doctores.service';
   templateUrl: './odontologos-page.component.html',
   styleUrls: ['./odontologos-page.component.css']
 })
-export class OdontologosPageComponent implements OnInit {
+export class OdontologosPageComponent implements OnInit, OnDestroy {
   doctores: Doctor[] = [];
   doctorSeleccionado: Doctor | null = null;
 
-  private doctoresSub!: Subscription;
+  private doctoresSub: Subscription = new Subscription();
   private doctoresService = inject(DoctoresService);
 
   panelModificarDoctorVisible: boolean = false;
@@ -23,15 +23,16 @@ export class OdontologosPageComponent implements OnInit {
   }
 
   load(): void {
-    this.doctoresSub = this.doctoresService.getAll().subscribe({
+    const sub = this.doctoresService.getAll().subscribe({
       next: (data) => {
         this.doctores = data;
         console.log(this.doctores);
       },
       error: (e) => {
-        console.error(e);
+        console.error('Error al cargar doctores:', e);
       }
     });
+    this.doctoresSub.add(sub);
   }
 
   update(d: Doctor): void {
@@ -42,99 +43,73 @@ export class OdontologosPageComponent implements OnInit {
       es_admin: d.es_admin
     };
 
-    this.doctoresService.update(d.id_doctor, doctorMOD).subscribe({
+    const sub = this.doctoresService.update(d.id_doctor, doctorMOD).subscribe({
       next: () => {
         this.load();
       },
       error: (e) => {
-        console.error(e);
+        console.error('Error al actualizar doctores:', e);
       }
     });
-  }
-
-  getById(id: string): void {
-    let id_:number = Number(id);
-
-    this.doctoresService.getById(id_).subscribe({
-      next: (data) => {
-        this.doctores = [data];
-      },
-      error: (e) => {
-        console.error(e);
-      }
-    });
-  }
-
-  getByName(name: string): void {
-    if (name === '') {
-      this.load();
-      
-    } else {
-      this.doctoresService.getByName(name).subscribe({
-        next: (data) => {
-          this.doctores = [data];
-        },
-        error: (e) => {
-          console.error(e);
-        }
-      });
-    }
+    this.doctoresSub.add(sub);
   }
 
   create(d: Omit<Doctor, 'id_doctor'>): void {
-    this.doctoresService.create(d).subscribe({
+    const sub = this.doctoresService.create(d).subscribe({
       next: () => {
         this.load();
-        this.togglePannel2();
+        this.toggleCrearPanel();
       },
       error: (e) => {
-        console.error(e);
+        console.error('Error al crear doctor:', e);
       }
     });
+    this.doctoresSub.add(sub);
   }
 
   remove(id: number): void {
     console.log(id);
-    this.doctoresService.remove(id).subscribe({
+    const sub = this.doctoresService.remove(id).subscribe({
       next: () => {
         this.load();
       },
       error: (e) => {
-        console.error(e);
+        console.error('Error al eliminar doctores. Verifique si tiene turnos asignados:', e);
       }
     });
+    this.doctoresSub.add(sub);
 
     // CREO QUE NO FUNCIONA PORQUE EN LA PARTE DE LAS FKS FALTO PONER ON DELETE CASCADE PARA QUE NO SALTE EL ERROR DE QUE NO SE PUEDEN BORRAR FILAS PADRES
   }
 
   selectDoctor(value: Doctor): void {
-    this.togglePannel();
+    this.toggleModificarPanel();
 
     this.doctorSeleccionado = value;
     console.log(this.doctorSeleccionado); 
   }
   
   handleSearch(term: string): void {
-    this.doctoresService.getDoctores(term).subscribe({
+    const sub = this.doctoresService.getDoctores(term).subscribe({
       next: (data) => {
-        /** Ehhhhhhhhh */
+        this.doctores = data;
       },
       error: (err) => {
-        console.error(err);
+        console.error('Error al buscar doctores:', err);
       },
     });
+    this.doctoresSub.add(sub);
   }
 
-
-  togglePannel(): void {
+  toggleModificarPanel(): void {
     this.panelModificarDoctorVisible = !this.panelModificarDoctorVisible;
   }
 
-  togglePannel2(): void {
+  toggleCrearPanel(): void {
     this.panelCrearDoctorVisible = !this.panelCrearDoctorVisible;
   }
 
   ngOnDestroy(): void {
-    this.doctoresSub.unsubscribe();
+    this.doctoresSub?.unsubscribe();
   }
 }
