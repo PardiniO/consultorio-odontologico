@@ -2,6 +2,8 @@ import type { Request, Response } from "express";
 import { PacienteModel, type PacienteInput } from "../models/paciente.model";
 
 type IdParams = { id: string };
+type UserParams = { user: string };
+
 
 function parseId(value: string): number | null {
     const id = Number(value);
@@ -12,7 +14,9 @@ function isPacienteInput(body: any): body is PacienteInput {
     return (
         typeof body?.nombre === 'string' && body.nombre.trim() !== '' &&
         typeof body?.apellido === 'string' && body.apellido.trim() !== '' &&
-        typeof body?.fecha_nacimiento === 'string' && body.fecha_nacimiento.trim() !== '' 
+        typeof body?.fecha_nacimiento === 'string' && body.fecha_nacimiento.trim() !== '' &&
+                typeof body?.usuario === 'string' && body.usuario.trim() !== '' &&
+        typeof body?.contrasena === 'string' && body.contrasena.trim() !== ''
     );
 }
 
@@ -36,16 +40,36 @@ export const getById = async (req: Request<IdParams>, res: Response) => {
     res.json(paciente);
 };
 
+export const getByUser = async (req: Request<UserParams>, res: Response) => {
+    const user = req.params.user;
+    if (!user) {
+        res.status(400).json({error: 'Usuario inválido'});
+        return;
+    };
+
+    const doctor = await PacienteModel.findByUser(user);
+    if (!doctor) {
+        res.status(404).json({error: 'Paciente no encontrado'});
+        return;
+    }
+
+    res.json(doctor);
+};
+
 export const getWithFilters = async (req: Request, res: Response) =>{
     const id_paciente = req.query.id_paciente === undefined ? undefined : Number(req.query.id_paciente);
     const nombre = req.query.nombre as string | undefined;
     const apellido = req.query.apellido as string | undefined;
     const fecha_nacimiento = req.query.estado as string | undefined;
+    const usuario = req.query.usuario as string |  undefined;
+    const contrasena = req.query.contrasena as string | undefined;
 
     const paciente = await PacienteModel.findWithFilters(id_paciente,
     nombre,
     apellido,
-    fecha_nacimiento);
+    fecha_nacimiento,
+    usuario,
+    contrasena);
     if (!paciente) {
         return res.status(404).json({ error: 'Paciente no encontrado' });
     }

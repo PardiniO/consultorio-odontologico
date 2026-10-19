@@ -17,11 +17,14 @@ export class OdontologoAltaComponent {
   doctor: Omit<Doctor, 'id_doctor'> = {
     nombre: '',
     apellido: '',
+    usuario: '',
+    contrasena: '',
     rol: 'Endodoncista',
     es_admin: false
   };
 
   crear(): void {
+    console.log(this.doctor);
     this.crearDoctor.emit(this.doctor);
   }
 

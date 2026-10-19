@@ -74,7 +74,7 @@ export const TurnoModel = {
         apellido_doctor,
         rol_doctor
       FROM v_turnos
-      WHERE id = ?`,
+      WHERE id_turno = ?`,
       [id]
     );
 

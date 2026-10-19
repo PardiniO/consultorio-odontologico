@@ -38,6 +38,8 @@ export class OdontologosPageComponent implements OnInit {
     const doctorMOD: Omit<Doctor, 'id_doctor'> = {
       nombre: d.nombre,
       apellido: d.apellido,
+      usuario: d.usuario,
+      contrasena: d.contrasena,
       rol: d.rol,
       es_admin: d.es_admin
     };
@@ -81,8 +83,8 @@ export class OdontologosPageComponent implements OnInit {
     }
   }
 
-  create(d: Omit<Doctor, 'id_doctor'>): void {
-    this.doctoresService.create(d).subscribe({
+  register(d: Omit<Doctor, 'id_doctor'>): void {
+    this.doctoresService.register(d).subscribe({
       next: () => {
         this.load();
         this.togglePannel2();

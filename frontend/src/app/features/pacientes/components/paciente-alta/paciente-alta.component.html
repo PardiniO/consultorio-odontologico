@@ -9,6 +9,14 @@
         <input id="apellido" type="text" placeholder="Ej: Doe" class="form__input" [(ngModel)]="paciente.apellido">
     </div>
     <div class="form__field">
+        <label for="user" class="form__label">Usuario:</label>
+        <input id="user" type="text" placeholder="Ej: Usuario123" class="form__input" [(ngModel)]="paciente.usuario">
+    </div>
+    <div class="form__field">
+        <label for="password" class="form__label">Contraseña:</label>
+        <input id="password" type="text" placeholder="Ej: 12345678" class="form__input" [(ngModel)]="paciente.contrasena">
+    </div>
+    <div class="form__field">
         <label for="speciality">Fecha de nacimiento:</label>
         <input class="input-date" type="date" [(ngModel)]="paciente.fecha_nacimiento">
     </div>

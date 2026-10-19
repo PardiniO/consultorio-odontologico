@@ -39,7 +39,7 @@ export class PacientesPageComponent implements OnInit {
       nombre: p.nombre,
       apellido: p.apellido,
       usuario: p.usuario,
-      contraseña: p.contraseña,
+      contrasena: p.contrasena,
       fecha_nacimiento: p.fecha_nacimiento
     };
 
@@ -82,8 +82,8 @@ export class PacientesPageComponent implements OnInit {
     }
   }
 
-  create(p: Omit<Paciente, 'id_paciente'>): void {
-    this.pacientesService.create(p).subscribe({
+  register(p: Omit<Paciente, 'id_paciente'>): void {
+    this.pacientesService.register(p).subscribe({
       next: () => {
         this.load();
         this.togglePannel2();

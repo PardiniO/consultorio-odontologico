@@ -3,6 +3,6 @@ export interface Paciente {
     nombre: string;
     apellido: string;
     usuario: string;
-    contraseña: string;
+    contrasena: string;
     fecha_nacimiento: string;
 }

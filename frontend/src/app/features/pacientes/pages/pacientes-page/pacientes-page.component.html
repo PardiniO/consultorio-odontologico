@@ -1,4 +1,4 @@
-<app-header [titulo]="'Pacientes'"></app-header>
+<!-- <app-header [titulo]="'Pacientes'"></app-header> -->
 <div class="content">
     <div class="content__patients-manager">
         <div class="content__search-bar" *ngIf="!panelModificarPacienteVisible && !panelCrearPacienteVisible">
@@ -18,7 +18,7 @@
             </div>
             <div class="content__create-patients" *ngIf="panelCrearPacienteVisible">
                 <app-paciente-alta *ngIf="panelCrearPacienteVisible" (salir)="togglePannel2()"
-                (crear)="create($event)"></app-paciente-alta>
+                (crear)="register($event)"></app-paciente-alta>
             </div>
         </div>
     </div>

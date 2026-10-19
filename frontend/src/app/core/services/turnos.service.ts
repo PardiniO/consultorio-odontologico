@@ -11,9 +11,11 @@ export class TurnosService {
   
     private http = inject(HttpClient);
 
+    private token: string = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2wiOiJFbmRvZG9uY2lzdGEiLCJlc0FkbWluIjoxLCJpYXQiOjE3OTI0NDIzMjEsImV4cCI6MTc5MjQ0OTUyMX0.YXhajXlgBtb6js-cvYr6awINgUtw2ZHjwomHfFt_trE';
+
     private headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2wiOiJFbmRvZG9uY2lzdGEiLCJlc0FkbWluIjoxLCJpYXQiOjE3OTI0MjEzMTUsImV4cCI6MTc5MjQyODUxNX0.VW2FTc0oePZZjHchIqHuvCyUaVaAa2U6HndNHgFwrB8'
+      'Authorization': `Bearer ${this.token}`
     });
 
     getAll(): Observable<Turno[]> {

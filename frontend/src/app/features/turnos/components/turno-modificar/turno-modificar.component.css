@@ -5,9 +5,10 @@
     align-items: center;
     text-align: center;
     width: 25vw;
-    height: 50vh;
+    height: 55vh;
     gap: 10px;
-    background-color: rgb(172, 171, 171);
+    background-color: rgba(172, 171, 171, 0.435);
+    backdrop-filter: blur(10px);
     border-radius: 10px;
     border: 2px solid gray;
 }

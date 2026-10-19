@@ -8,7 +8,7 @@ export interface Doctor {
   apellido: string;
   rol: 'Endodoncista' | 'Ortodoncista';
   usuario: string;
-  contraseña: string;
+  contrasena: string;
   es_admin: boolean;
 }
 
@@ -25,7 +25,7 @@ export const DoctorModel = {
         apellido,
         rol,
         usuario,
-        contraseña,
+        contrasena,
         es_admin
       FROM doctores`
     );
@@ -41,7 +41,7 @@ export const DoctorModel = {
         apellido,
         rol,
         usuario,
-        contraseña,
+        contrasena,
         es_admin
       FROM doctores
       WHERE id_doctor = ?`,
@@ -59,7 +59,7 @@ export const DoctorModel = {
         apellido,
         rol,
         usuario,
-        contraseña,
+        contrasena,
         es_admin
       FROM doctores
       WHERE usuario = ?`,
@@ -75,7 +75,7 @@ export const DoctorModel = {
     apellido?: string,
     rol?: 'Endodoncista' | 'Ortodoncista',
     usuario?: string,
-    contraseña?: string,
+    contrasena?: string,
     es_admin?: boolean
   ): Promise<Doctor[]> {
     const [rows] = await pool.query<DoctorRow[]>(
@@ -85,7 +85,7 @@ export const DoctorModel = {
         apellido,
         rol,
         usuario,
-        contraseña,
+        contrasena,
         es_admin
       FROM doctores
       WHERE
@@ -94,7 +94,7 @@ export const DoctorModel = {
         AND apellido = COALESCE(?, apellido)
         AND rol = COALESCE(?, rol)
         AND usuario = COALESCE(?, usuario)
-        AND contraseña = COALESCE(?, contraseña)
+        AND contrasena = COALESCE(?, contrasena)
         AND es_admin = COALESCE(?, es_admin)`,
       [
         id_doctor ?? null,
@@ -102,7 +102,7 @@ export const DoctorModel = {
         apellido ?? null,
         rol ?? null,
         usuario ?? null,
-        contraseña ?? null,
+        contrasena ?? null,
         es_admin ?? null
       ]
     );
@@ -113,14 +113,14 @@ export const DoctorModel = {
   async create(data: DoctorInput): Promise<Doctor> {
     const [result] = await pool.query<ResultSetHeader>(
       `INSERT INTO doctores
-        (nombre, apellido, rol, usuario, contraseña, es_admin)
+        (nombre, apellido, rol, usuario, contrasena, es_admin)
        VALUES (?, ?, ?, ?, ?, ?)`,
       [
         data.nombre,
         data.apellido,
         data.rol,
         data.usuario,
-        data.contraseña,
+        data.contrasena,
         data.es_admin
       ]
     );
@@ -139,7 +139,7 @@ export const DoctorModel = {
         apellido = ?,
         rol = ?,
         usuario = ?,
-        contraseña = ?,
+        contrasena = ?,
         es_admin = ?
        WHERE id_doctor = ?`,
       [
@@ -147,7 +147,7 @@ export const DoctorModel = {
         data.apellido,
         data.rol,
         data.usuario,
-        data.contraseña,
+        data.contrasena,
         data.es_admin,
         id
       ]

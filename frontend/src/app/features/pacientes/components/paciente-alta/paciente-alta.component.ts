@@ -15,7 +15,7 @@ export class PacienteAltaComponent {
     nombre: '',
     apellido: '',
     usuario: '',
-    contraseña: '',
+    contrasena: '',
     fecha_nacimiento: '2026-10-01'
   };
 
