@@ -33,12 +33,29 @@ export const getById = async (req: Request<IdParams>, res: Response) => {
 
     const turno = await TurnoModel.findById(id);
     if (!turno) {
-        res.status(404).json({ error: 'Turno no encontrado' });
-        return;
+        return res.status(404).json({ error: 'Turno no encontrado' });
     }
 
-    res.json(turno);
+    res.status(200).json(turno);
 };
+
+export const getWithFilters = async (req: Request, res: Response) =>{
+    const id_turno = req.query.id === undefined ? undefined : Number(req.query.id);
+    const horario = req.query.horario as string | undefined;
+    const sala = req.query.sala as 'A17' | 'A19' | undefined;
+    const razon = req.query.razon as string | undefined;
+    const descripcion = req.query.descripcion as string | undefined;
+    const estado = req.query.estado as 'pendiente' | 'cancelado' | 'confirmado'| undefined;
+    const id_paciente = req.query.id_paciente === undefined ? undefined : Number(req.query.id_paciente);
+    const id_doctor = req.query.id_doctor === undefined ? undefined : Number(req.query.id_doctor);
+
+    const turno = await TurnoModel.findWithFilters(id_turno,horario,sala,razon,descripcion,estado,id_paciente,id_doctor);
+    if (!turno) {
+        return res.status(404).json({ error: 'Turno no encontrado' });
+    }
+    
+    res.status(200).json(turno)
+}
 
 export const create = async (req: Request, res: Response) => {
     if (!isTurnoInput(req.body)) {
@@ -62,7 +79,7 @@ export const update = async (req: Request<IdParams>, res: Response) => {
     const ok = await TurnoModel.update(id, req.body);
     if (!ok) { res.status(404).json({ error: 'Turno no encontrado' }); return; }
 
-    res.json({ id_turno: id, ...req.body });
+    res.json({ id, ...req.body });
 };
 
 export const remove = async (req: Request<IdParams>, res: Response) => {

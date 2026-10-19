@@ -1,14 +1,17 @@
 CREATE DATABASE IF NOT EXISTS consultorio;
 USE consultorio;
 
-CREATE TABLE IF NOT EXISTS pacientes(
+CREATE TABLE pacientes(
         id_paciente INT PRIMARY KEY AUTO_INCREMENT,
         nombre VARCHAR(30) NOT NULL,
         apellido VARCHAR(30) NOT NULL,
-        fecha_nacimiento DATE NOT NULL
+        fecha_nacimiento DATE NOT NULL,
+		
+        usuario VARCHAR(30) NOT NULL UNIQUE,
+        contraseña VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS doctores(
+CREATE TABLE doctores(
         id_doctor INT PRIMARY KEY AUTO_INCREMENT,
         nombre VARCHAR(30) NOT NULL,
         apellido VARCHAR(30) NOT NULL,
@@ -20,7 +23,7 @@ CREATE TABLE IF NOT EXISTS doctores(
         es_admin BOOLEAN NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS turnos(
+CREATE TABLE turnos(
         id_turno INT PRIMARY KEY AUTO_INCREMENT,
         horario DATE NOT NULL,
         sala ENUM('A17', 'A19') NOT NULL,
@@ -29,9 +32,9 @@ CREATE TABLE IF NOT EXISTS turnos(
         estado ENUM('pendiente', 'cancelado', 'confirmado') NOT NULL,
         
         id_paciente INT NOT NULL,
-        FOREIGN KEY (id_paciente) REFERENCES pacientes(id_paciente),
+        FOREIGN KEY (id_paciente) REFERENCES pacientes(id_paciente) ON DELETE CASCADE,
         id_doctor INT NOT NULL,
-        FOREIGN KEY (id_doctor) REFERENCES doctores(id_doctor)
+        FOREIGN KEY (id_doctor) REFERENCES doctores(id_doctor) ON DELETE CASCADE
 );
 
 SELECT * FROM doctores;

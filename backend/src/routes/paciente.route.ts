@@ -6,6 +6,7 @@ import esAdmin                 from "../middleware/esAdmin.middleware";
 const router = Router();
 
 router.get('/'      , verificarToken, esAdmin, pacienteController.getAll);
+router.get('/filters', verificarToken, esAdmin, pacienteController.getWithFilters)
 router.get('/:id'   , verificarToken, esAdmin,  pacienteController.getById);
 router.post('/'     , pacienteController.create);
 router.put('/:id'   , verificarToken, esAdmin,  pacienteController.update);

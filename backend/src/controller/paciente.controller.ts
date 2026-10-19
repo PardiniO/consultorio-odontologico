@@ -36,6 +36,23 @@ export const getById = async (req: Request<IdParams>, res: Response) => {
     res.json(paciente);
 };
 
+export const getWithFilters = async (req: Request, res: Response) =>{
+    const id_paciente = req.query.id_paciente === undefined ? undefined : Number(req.query.id_paciente);
+    const nombre = req.query.nombre as string | undefined;
+    const apellido = req.query.apellido as string | undefined;
+    const fecha_nacimiento = req.query.estado as string | undefined;
+
+    const paciente = await PacienteModel.findWithFilters(id_paciente,
+    nombre,
+    apellido,
+    fecha_nacimiento);
+    if (!paciente) {
+        return res.status(404).json({ error: 'Paciente no encontrado' });
+    }
+    
+    res.status(200).json(paciente)
+}
+
 export const create = async (req: Request, res: Response) => {
     if (!isPacienteInput(req.body)) {
         res.status(400).json({

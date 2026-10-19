@@ -55,6 +55,34 @@ export const getByUser = async (req: Request<UserParams>, res: Response) => {
     }
 
     res.json(doctor);
+};
+
+export const getWithFilters = async (req: Request, res: Response) =>{
+    const id_doctor = req.query.id_doctor === undefined ? undefined : Number(req.query.id_doctor);
+    const nombre = req.query.nombre as string | undefined;
+    const apellido = req.query.apellido as string | undefined;
+    const rol = req.query.rol as 'Endodoncista' | 'Ortodoncista' | undefined;
+    const usuario = req.query.usuario as string |  undefined;
+    const contraseña = req.query.contraseña as string | undefined;
+    const es_admin =
+    req.query.es_admin === 'true' ? true :
+    req.query.es_admin === 'false' ? false :
+    undefined;
+
+    const doctor = await DoctorModel.findWithFilters(
+        id_doctor,
+        nombre,
+        apellido,
+        rol,
+        usuario,
+        contraseña,
+        es_admin
+    );
+    if (!doctor) {
+        return res.status(404).json({ error: 'Paciente no encontrado' });
+    }
+    
+    res.status(200).json(doctor)
 }
 
 export const create = async (req: Request, res: Response) => {
