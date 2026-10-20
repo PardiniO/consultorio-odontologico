@@ -82,7 +82,7 @@ export const TurnoModel = {
   },
 
   async findWithFilters(
-    id_turno?: number,
+    id?: number,
     horario?: string,
     sala?: 'A17' | 'A19',
     razon?: string,
@@ -109,7 +109,7 @@ export const TurnoModel = {
         rol_doctor
       FROM v_turnos
       WHERE
-        id_turno = COALESCE(?, id_turno)
+        id = COALESCE(?, id)
         AND horario = COALESCE(?, horario)
         AND sala = COALESCE(?, sala)
         AND razon = COALESCE(?, razon)
@@ -118,7 +118,7 @@ export const TurnoModel = {
         AND id_paciente = COALESCE(?, id_paciente)
         AND id_doctor = COALESCE(?, id_doctor)`,
       [
-        id_turno ?? null,
+        id ?? null,
         horario ?? null,
         sala ?? null,
         razon ?? null,
@@ -136,7 +136,7 @@ export const TurnoModel = {
     const [result] = await pool.query<ResultSetHeader>(
       `INSERT INTO turnos
         (horario, sala, razon, descripcion, estado, id_paciente, id_doctor)
-       VALUES (?, ?, ?, ?, ?, ?, ?)`,
+      VALUES (?, ?, ?, ?, ?, ?, ?)`,
       [
         data.horario,
         data.sala,

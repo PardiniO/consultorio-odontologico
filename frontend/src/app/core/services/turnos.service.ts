@@ -55,6 +55,6 @@ export class TurnosService {
       }
     });
 
-    return this.http.get<Turno[]>(`${this.apiUrl}/turnos`, { params });
+    return this.http.get<Turno[]>(`${this.apiUrl}/filters`, { params, headers: this.headers });
   }
 }

@@ -117,6 +117,7 @@ export class TurnosPageComponent implements OnInit, OnDestroy {
     });  
     this.turnosSub.add(sub);
   }    
+  
   toggleModificarPanel(): void {
     this.panelModificarTurnoVisible = !this.panelModificarTurnoVisible;
   }
