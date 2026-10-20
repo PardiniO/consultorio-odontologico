@@ -1,0 +1,21 @@
+{
+  "name": "consultorio-odontologico",
+  "version": "1.0.0",
+  "description": "El repositorio está organizado por módulos:",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PardiniO/consultorio-odontologico.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/PardiniO/consultorio-odontologico/issues"
+  },
+  "homepage": "https://github.com/PardiniO/consultorio-odontologico#readme"
+}
