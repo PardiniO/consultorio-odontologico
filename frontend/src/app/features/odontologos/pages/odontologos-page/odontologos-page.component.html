@@ -1,43 +1,65 @@
-<div class="wrapper">
-    <app-header [titulo]="'Gestor de odontologos'">
-        <app-search-bar
-            [placeholderText]="'Buscar doctores...'"
-            (searchEvent)="handleSearch($event)">
-        </app-search-bar>
-
-        <div class="content__actions" *ngIf="! panelModificarDoctorVisible && !panelCrearDoctorVisible">
-            <button class="create-btn" (click)="toggleCrearPanel()">+</button>
+<app-header *ngIf="!panelModificarDoctorVisible && !panelCrearDoctorVisible">
+    <!-- <app-search-bar [placeholderText]="'Buscar doctor...'" (searchEvent)="handleSearch($event)" doctores>
+    </app-search-bar> -->
+    <div class="filtrosDoctores" doctores>
+        <div class="filtrosDoctores__filter">
+            <label for="rol">Rol:</label>
+            <select #sr id="rol" class="select" (change)="aplicarFiltros(sr.value, sn.value, ssn.value, sun.value)">
+                <!-- sr: select-rol -->
+                <option value="">Todos</option>
+                <option value="Endodoncista">Endodoncista</option>
+                <option value="Ortodoncista">Ortodoncista</option>
+            </select>
         </div>
-    </app-header>
+        <div class="filtrosDoctores__filter">
+            <label for="name">Nombre:</label>
+            <select #sn id="name" class="select" (change)="aplicarFiltros(sr.value, sn.value, ssn.value, sun.value)">
+                <!-- sn: select-name -->
+                <option value="">Todos</option>
+                <option *ngFor="let d of nombresDoctores" [value]="d"> {{ d }} </option>
+            </select>
+        </div>
+        <div class="filtrosDoctores__filter">
+            <label for="surname">Apellido:</label>
+            <select #ssn id="surname" class="select" (change)="aplicarFiltros(sr.value, sn.value, ssn.value, sun.value)">
+                <!-- ssn: select-sur-name -->
+                <option value="">Todos</option>
+                <option *ngFor="let d of apellidosDoctores" [value]="d"> {{ d }} </option>
+            </select>
+        </div>
+        <div class="filtrosDoctores__filter">
+            <label for="username">Usuario:</label>
+            <select #sun id="username" class="select" (change)="aplicarFiltros(sr.value, sn.value, ssn.value, sun.value)">
+                <!-- sun: select-user-name -->
+                <option value="">Todos</option>
+                <option *ngFor="let d of usuariosDoctores" [value]="d"> {{ d }} </option>
+            </select>
+        </div>
+    </div>
+    <div class="content__actions" doctores>
+        <button class="create-btn" (click)="toggleCrearPanel()">+</button>
+    </div>
+</app-header>
 
-    <div class="content">
-        <div class="content__doctors-manager">
-            <div class="content__doctors-section" [ngStyle]="{ 'height' : panelCrearDoctorVisible ? '90vh' : '80vh' }">
-                
-                <div class="content__doctors" *ngIf="! panelModificarDoctorVisible && !panelCrearDoctorVisible">
-                    <app-odontologo-card 
-                        *ngFor="let d of doctores" 
-                        [doctor]="d" 
-                        (modificar)="selectDoctor($event)" 
-                        (eliminar)="remove($event)">
-                    </app-odontologo-card>
-                </div>
-                
-                <div class="content__modify-doctor" *ngIf=" panelModificarDoctorVisible">
-                    <app-odontologo-modificar 
-                        *ngIf="doctorSeleccionado" 
-                        [doctorSeleccionado]="doctorSeleccionado" 
-                        (salir)="toggleModificarPanel()" 
-                        (modificar)="update($event)">
-                    </app-odontologo-modificar>
-                </div>
-                
-                <div class="content__create-doctor" *ngIf="panelCrearDoctorVisible">
-                    <app-odontologo-alta
-                        (salir)="toggleCrearPanel()" 
-                        (crearDoctor)="register($event)">
-                    </app-odontologo-alta>
-                </div>
+<div class="content" [ngStyle]="{ 'height' : panelModificarDoctorVisible ? '100vh' : panelCrearDoctorVisible ? '100vh' : '90vh' }">
+    <div class="content__doctors-manager">
+        <div class="content__doctors-section">
+
+            <div class="content__doctors" *ngIf="! panelModificarDoctorVisible && !panelCrearDoctorVisible">
+                <app-odontologo-card *ngFor="let d of doctores" [doctor]="d" (modificar)="selectDoctor($event)"
+                    (eliminar)="remove($event)">
+                </app-odontologo-card>
+            </div>
+
+            <div class="content__modify-doctor" *ngIf=" panelModificarDoctorVisible">
+                <app-odontologo-modificar *ngIf="doctorSeleccionado" [doctorSeleccionado]="doctorSeleccionado"
+                    (salir)="toggleModificarPanel()" (modificar)="update($event)">
+                </app-odontologo-modificar>
+            </div>
+
+            <div class="content__create-doctor" *ngIf="panelCrearDoctorVisible">
+                <app-odontologo-alta (salir)="toggleCrearPanel()" (crearDoctor)="register($event)">
+                </app-odontologo-alta>
             </div>
         </div>
     </div>

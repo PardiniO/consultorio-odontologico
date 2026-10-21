@@ -1,17 +1,44 @@
-<app-header [titulo]="'Pacientes'">
-    <app-search-bar
-        [placeholderText]="'Buscar pacientes...'"
-        (searchEvent)="handleSearch($event)">
-    </app-search-bar>
+<app-header *ngIf="!panelModificarPacienteVisible && !panelCrearPacienteVisible">
+    <div class="filtrosPacientes" pacientes>
+        <div class="filtrosPacientes__filter">
+            <label for="name">Nombre:</label>
+            <select #sn id="name" class="select" (change)="aplicarFiltros(sn.value, ssn.value, ibd.value, sun.value)">
+                <!-- sn: select-name -->
+                <option value="">Todos</option>
+                <option *ngFor="let p of nombresPacientes" [value]="p"> {{ p }} </option>
+            </select>
+        </div>
+        <div class="filtrosPacientes__filter">
+            <label for="surname">Apellido:</label>
+            <select #ssn id="surname" class="select" (change)="aplicarFiltros(sn.value, ssn.value, ibd.value, sun.value)">
+                <!-- ssn: select-surname -->
+                <option value="">Todos</option>
+                <option *ngFor="let p of apellidosPacientes" [value]="p"> {{ p }} </option>
+            </select>
+        </div>
+        <div class="filtrosPacientes__filter">
+            <label for="birth-date">Fecha de nacimiento:</label>
+            <input class="input-date" #ibd id="birth-date" type="date" (change)="aplicarFiltros(sn.value, ssn.value, ibd.value, sun.value)">
+            <!-- ibd: input-birth-date -->
+        </div>
+        <div class="filtrosPacientes__filter">
+            <label for="username">Usuario:</label>
+            <select #sun id="username" class="select" (change)="aplicarFiltros(sn.value, ssn.value, ibd.value, sun.value)">
+                <!-- sun: select-user-name -->
+                <option value="">Todos</option>
+                <option *ngFor="let p of usuariosPacientes" [value]="p"> {{ p }} </option>
+            </select>
+        </div>
+    </div>
     
-    <div class="content__actions " *ngIf="!panelModificarPacienteVisible && !panelCrearPacienteVisible">
+    <div class="content__actions " pacientes>
         <button class="create-btn" (click)="toggleCrearPanel()">+</button>
     </div>
 </app-header>
 
-<div class="content">
+<div class="content" [ngStyle]="{ 'height' : panelModificarPacienteVisible ? '100vh' : panelCrearPacienteVisible ? '100vh' : '90vh' }">
     <div class="content__patients-manager">
-        <div class="content__patients-section" [ngStyle]="{ 'height' : panelCrearPacienteVisible ? '90vh' : '79vh' }">
+        <div class="content__patients-section">
             
             <div class="content__patients" *ngIf="!panelModificarPacienteVisible && !panelCrearPacienteVisible">
                 <app-paciente-card 
@@ -36,10 +63,6 @@
                     (salir)="toggleCrearPanel()"
                     (crear)="register($event)">
                 </app-paciente-alta>
-            </div>
-            <div class="content__create-patients" *ngIf="panelCrearPacienteVisible">
-                <app-paciente-alta *ngIf="panelCrearPacienteVisible" (salir)="toggleCrearPanel()"
-                (crear)="register($event)"></app-paciente-alta>
             </div>
         </div>
     </div>

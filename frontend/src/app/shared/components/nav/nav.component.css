@@ -1,13 +1,16 @@
 .nav {
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: center;
     align-items: start;
     text-align: center;
     gap: 10px;
     padding: 0 15%;
     width: 20vw;
+    height: 100vh;
     flex-grow: 1;
+    background: rgba(0, 0, 0, 0.181);
+    backdrop-filter: blur(10px);
 }
 
 .nav__button {

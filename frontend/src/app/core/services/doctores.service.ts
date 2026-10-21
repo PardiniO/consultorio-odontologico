@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Doctor } from '../models/doctor.interface';
+import { FiltroDoctores } from '../models/filtro-doctores.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class DoctoresService {
 
   private http = inject(HttpClient);
 
-  private token: string = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2wiOiJFbmRvZG9uY2lzdGEiLCJlc0FkbWluIjoxLCJpYXQiOjE3OTI0NDkwMDEsImV4cCI6MTc5MjQ1NjIwMX0.DKVtn7yrZZP2Asz80_9D8NCVpk1U3Oqf51aw92n_fPM';
+  private token: string = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2wiOiJFbmRvZG9uY2lzdGEiLCJlc0FkbWluIjoxLCJpYXQiOjE3OTI2MDU4MjAsImV4cCI6MTc5MjYxMzAyMH0.As7tCyWdKcNO7hY1yJCWG00ck2qM2ECC8Q5kbrI7-YA';
 
   private headers = new HttpHeaders({
     'Content-Type': 'application/json',
@@ -29,6 +30,20 @@ export class DoctoresService {
   getDoctores(searchTerm: string): Observable<Doctor[]> {
     const params = new HttpParams().set('q', searchTerm);
     return this.http.get<Doctor[]>(this.apiUrl, { headers: this.headers });
+  }
+
+  getDoctoresFiltrados(filtros: FiltroDoctores): Observable<Doctor[]> {
+    let params = new HttpParams();
+    const claves = Object.keys(filtros) as Array<keyof FiltroDoctores>;
+
+    claves.forEach(key => {
+      const valor = filtros[key];
+      if (valor !== undefined && valor !== null && valor !== '') {
+        params = params.set(key, valor);
+      }
+    });
+
+    return this.http.get<Doctor[]>(`${this.apiUrl}/filters`, { params, headers: this.headers });
   }
 
   getByName(name: string): Observable<Doctor> {

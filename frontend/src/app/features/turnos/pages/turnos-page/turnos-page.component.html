@@ -1,11 +1,8 @@
-<app-header  [titulo]="'Gestión de turnos'">
-    <div class="filtrosTurnos">
-        <div class="filtro-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sliders-horizontal preview-icon"><path d="M10 5H3"/><path d="M12 19H3"/><path d="M14 3v4"/><path d="M16 17v4"/><path d="M21 12h-9"/><path d="M21 19h-5"/><path d="M21 5h-7"/><path d="M8 10v4"/><path d="M8 12H3"/></svg>
-        </div>
+<app-header *ngIf="!panelModificarTurnoVisible && !panelCrearTurnoVisible">
+    <div class="filtrosTurnos" turnos>
         <div class="filtrosTurnos__estado">
             <label for="estado">Estado</label>
-            <select #estadoSelect name="estado" id="estado" (change)="aplicarFiltros(estadoSelect.value, salaSelect.value, fechaDesde.value, fechaHasta.value)">
+            <select #estadoSelect class="select" name="estado" id="estado" (change)="aplicarFiltros(estadoSelect.value, salaSelect.value, fechaDesde.value, fechaHasta.value)">
                 <option value="">Todos</option>
                 <option value="pendiente">Pendiente</option>
                 <option value="confirmado">Confirmado</option>
@@ -14,7 +11,7 @@
         </div>
         <div class="filtrosTurnos__sala">
             <label for="sala">Sala</label>
-            <select #salaSelect name="sala" id="sala" (change)="aplicarFiltros(estadoSelect.value, salaSelect.value, fechaDesde.value, fechaHasta.value)">
+            <select #salaSelect class="select" name="sala" id="sala" (change)="aplicarFiltros(estadoSelect.value, salaSelect.value, fechaDesde.value, fechaHasta.value)">
                 <option value="">Todas</option>
                 <option value="A17">A17</option>
                 <option value="A19">A19</option>
@@ -23,26 +20,26 @@
         <div class="filtrosTurnos__horario">
             <div class="horario-input-group">
                 <label for="fechaDesde">Desde:</label>
-                <input #fechaDesde type="date" id="fechaDesde" name="fechaDesde"
+                <input #fechaDesde class="input-date" type="date" id="fechaDesde" name="fechaDesde"
                         (change)="aplicarFiltros(estadoSelect.value, salaSelect.value, fechaDesde.value, fechaHasta.value)">
             </div>
             
             <div class="horario-input-group">
-                <label for="fechaHasta">Desde:</label>
-                <input #fechaHasta type="date" id="fechaHasta" name="fechaHasta"
+                <label for="fechaHasta">Hasta:</label>
+                <input #fechaHasta class="input-date" type="date" id="fechaHasta" name="fechaHasta"
                         (change)="aplicarFiltros(estadoSelect.value, salaSelect.value, fechaDesde.value, fechaHasta.value)">
             </div>
         </div>
     </div>
 
-    <div class="content__actions" *ngIf="!panelModificarTurnoVisible && !panelCrearTurnoVisible">
+    <div class="content__actions" turnos>
         <button class="create-btn" (click)="toggleCrearPanel()">+</button>
     </div>
 </app-header>
 
-<div class="content">
+<div class="content" [ngStyle]="{ 'height' : panelModificarTurnoVisible ? '100vh' : panelCrearTurnoVisible ? '100vh' : '90vh' }">
     <div class="content__turnos-manager">
-        <div class="content__turnos-section" [ngStyle]="{ 'height' : panelCrearTurnoVisible ? '90vh' : '79vh' }">
+        <div class="content__turnos-section">
             
             <div class="content__turnos" *ngIf="!panelModificarTurnoVisible && !panelCrearTurnoVisible">
                 <app-turno-card 
@@ -67,9 +64,6 @@
                     (salir)="toggleCrearPanel()" 
                     (crear)="register($event)">
                 </app-turno-alta>
-            </div>
-            <div class="content__create-turno" *ngIf="panelCrearTurnoVisible">
-                <app-turno-alta *ngIf="panelCrearTurnoVisible" (salir)="toggleCrearPanel()" (crear)="register($event)"></app-turno-alta>
             </div>
         </div>
     </div>

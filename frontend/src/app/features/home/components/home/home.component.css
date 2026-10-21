@@ -1,9 +1,21 @@
-.img-container {
-    position: relative; 
+.home-container { 
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     height: 100vh;
+    width: 100vw;
+    background: url('../../../../../../public/fondo.webp') rgba(0, 0, 0, 0.723);
+    background-position: center;
+    background-blend-mode: darken;
+}
+
+.title-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-grow: 1;
 }
 
 img {
@@ -13,7 +25,6 @@ img {
 }
 
 p {
-    position: absolute; 
     color: white;       
     font-size: 2rem;
     font-weight: 100;

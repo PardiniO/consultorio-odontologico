@@ -2,6 +2,7 @@ import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { Paciente } from '../../../../core/models/paciente.interface';
 import { Subscription } from 'rxjs';
 import { PacientesService } from '../../../../core/services/pacientes.service';
+import { FiltroPacientes } from '../../../../core/models/filtro-pacientes.interface';
 
 @Component({
   selector: 'app-pacientes-page',
@@ -10,8 +11,13 @@ import { PacientesService } from '../../../../core/services/pacientes.service';
 })
 export class PacientesPageComponent implements OnInit, OnDestroy {
   pacientes: Paciente[] = [];
+  nombresPacientes: string[] = [];
+  apellidosPacientes: string[] = [];
+  fechasDeNacimientoPacientes: string[] = [];
+  usuariosPacientes: string[] = [];
   pacienteSeleccionado: Paciente | null = null;
 
+  terminoBusqueda: string = '';
 
   private pacientesSub: Subscription = new Subscription();
   private pacientesService = inject(PacientesService);
@@ -28,6 +34,13 @@ export class PacientesPageComponent implements OnInit, OnDestroy {
       next: (data) => {
         this.pacientes = data;
         console.log(this.pacientes);
+
+        this.nombresPacientes = this.pacientes.map(p => p.nombre);
+        this.apellidosPacientes = this.pacientes.map(p => p.apellido);
+        this.fechasDeNacimientoPacientes = this.pacientes.map(p => p.fecha_nacimiento);
+        this.usuariosPacientes = this.pacientes.map(p => p.usuario);
+
+        console.log(this.nombresPacientes, this.apellidosPacientes, this.fechasDeNacimientoPacientes, this.usuariosPacientes);
       },
       error: (e) => {
         console.error('Error al cargar pacientes:', e);
@@ -111,6 +124,25 @@ export class PacientesPageComponent implements OnInit, OnDestroy {
     });
     this.pacientesSub.add(sub);
   }
+
+  aplicarFiltros(nombre: string, apellido: string, fecha_nacimiento: string, usuario: string): void {
+      const queryParams: FiltroPacientes = {};
+  
+      if (this.terminoBusqueda.trim()) queryParams.termino = this.terminoBusqueda;
+      if (nombre) queryParams.nombre = nombre;
+      if (apellido) queryParams.apellido = apellido;
+      if (fecha_nacimiento) queryParams.fecha_nacimiento = fecha_nacimiento;
+      if (usuario) queryParams.usuario = usuario;
+  
+      this.pacientesSub = this.pacientesService.getPacientesFiltrados(queryParams).subscribe({
+        next: (data) => {
+          this.pacientes = data;
+        },
+        error: (err) => {
+          console.error('Error al filtrar doctores:', err);
+        }
+      });
+    }
 
   ngOnDestroy(): void {
     this.pacientesSub.unsubscribe();

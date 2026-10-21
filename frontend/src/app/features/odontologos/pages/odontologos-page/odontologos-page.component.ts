@@ -2,6 +2,7 @@ import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { Doctor } from '../../../../core/models/doctor.interface';
 import { Subscription } from 'rxjs';
 import { DoctoresService } from '../../../../core/services/doctores.service';
+import { FiltroDoctores } from '../../../../core/models/filtro-doctores.interface';
 
 @Component({
   selector: 'app-odontologos-page',
@@ -10,9 +11,14 @@ import { DoctoresService } from '../../../../core/services/doctores.service';
 })
 export class OdontologosPageComponent implements OnInit, OnDestroy {
   doctores: Doctor[] = [];
+  nombresDoctores: string[] = [];
+  apellidosDoctores: string[] = [];
+  usuariosDoctores: string[] = [];
   doctorSeleccionado: Doctor | null = null;
 
-  private doctoresSub: Subscription = new Subscription();
+  terminoBusqueda: string = '';
+
+  private doctoresSub!: Subscription;
   private doctoresService = inject(DoctoresService);
 
   panelModificarDoctorVisible: boolean = false;
@@ -23,16 +29,23 @@ export class OdontologosPageComponent implements OnInit, OnDestroy {
   }
 
   load(): void {
-    const sub = this.doctoresService.getAll().subscribe({
+    this.doctoresSub = this.doctoresService.getAll().subscribe({
       next: (data) => {
         this.doctores = data;
         console.log(this.doctores);
+
+        this.nombresDoctores = this.doctores.map(d => d.nombre);
+
+        this.apellidosDoctores = this.doctores.map(d => d.apellido);
+
+        this.usuariosDoctores = this.doctores.map(d => d.usuario);
+
+        console.log(this.nombresDoctores, this.apellidosDoctores, this.usuariosDoctores);
       },
       error: (e) => {
         console.error('Error al cargar doctores:', e);
       }
     });
-    this.doctoresSub.add(sub);
   }
 
   update(d: Doctor): void {
@@ -45,7 +58,7 @@ export class OdontologosPageComponent implements OnInit, OnDestroy {
       es_admin: d.es_admin
     };
 
-    const sub = this.doctoresService.update(d.id_doctor, doctorMOD).subscribe({
+    this.doctoresSub = this.doctoresService.update(d.id_doctor, doctorMOD).subscribe({
       next: () => {
         this.load();
       },
@@ -53,11 +66,10 @@ export class OdontologosPageComponent implements OnInit, OnDestroy {
         console.error('Error al actualizar doctores:', e);
       }
     });
-    this.doctoresSub.add(sub);
   }
 
   register(d: Omit<Doctor, 'id_doctor'>): void {
-    const sub = this.doctoresService.register(d).subscribe({
+    this.doctoresSub = this.doctoresService.register(d).subscribe({
       next: () => {
         this.load();
         this.toggleCrearPanel();
@@ -66,12 +78,11 @@ export class OdontologosPageComponent implements OnInit, OnDestroy {
         console.error('Error al crear doctor:', e);
       }
     });
-    this.doctoresSub.add(sub);
   }
 
   remove(id: number): void {
     console.log(id);
-    const sub = this.doctoresService.remove(id).subscribe({
+    this.doctoresSub = this.doctoresService.remove(id).subscribe({
       next: () => {
         this.load();
       },
@@ -79,9 +90,6 @@ export class OdontologosPageComponent implements OnInit, OnDestroy {
         console.error('Error al eliminar doctores. Verifique si tiene turnos asignados:', e);
       }
     });
-    this.doctoresSub.add(sub);
-
-    // CREO QUE NO FUNCIONA PORQUE EN LA PARTE DE LAS FKS FALTO PONER ON DELETE CASCADE PARA QUE NO SALTE EL ERROR DE QUE NO SE PUEDEN BORRAR FILAS PADRES
   }
 
   selectDoctor(value: Doctor): void {
@@ -92,15 +100,15 @@ export class OdontologosPageComponent implements OnInit, OnDestroy {
   }
   
   handleSearch(term: string): void {
-    const sub = this.doctoresService.getDoctores(term).subscribe({
+    this.doctoresSub = this.doctoresService.getByName(term).subscribe({
       next: (data) => {
-        this.doctores = data;
+        this.doctores = [data];
+        this.load();
       },
       error: (err) => {
         console.error('Error al buscar doctores:', err);
       },
     });
-    this.doctoresSub.add(sub);
   }
 
   toggleModificarPanel(): void {
@@ -110,6 +118,25 @@ export class OdontologosPageComponent implements OnInit, OnDestroy {
   toggleCrearPanel(): void {
     this.panelCrearDoctorVisible = !this.panelCrearDoctorVisible;
   }
+
+  aplicarFiltros(rol: string, nombre: string, apellido: string, usuario: string): void {
+    const queryParams: FiltroDoctores = {};
+
+    if (this.terminoBusqueda.trim()) queryParams.termino = this.terminoBusqueda;
+    if (rol) queryParams.rol = rol;
+    if (nombre) queryParams.nombre = nombre;
+    if (apellido) queryParams.apellido = apellido;
+    if (usuario) queryParams.usuario = usuario;
+
+    this.doctoresSub = this.doctoresService.getDoctoresFiltrados(queryParams).subscribe({
+      next: (data) => {
+        this.doctores = data;
+      },
+      error: (err) => {
+        console.error('Error al filtrar doctores:', err);
+      }
+    });
+  }   
 
   ngOnDestroy(): void {
     this.doctoresSub?.unsubscribe();

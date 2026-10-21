@@ -12,7 +12,7 @@ export class TurnosService {
 
   private http = inject(HttpClient);
 
-  private token: string = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2wiOiJFbmRvZG9uY2lzdGEiLCJlc0FkbWluIjoxLCJpYXQiOjE3OTI0NDkwMDEsImV4cCI6MTc5MjQ1NjIwMX0.DKVtn7yrZZP2Asz80_9D8NCVpk1U3Oqf51aw92n_fPM';
+  private token: string = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2wiOiJFbmRvZG9uY2lzdGEiLCJlc0FkbWluIjoxLCJpYXQiOjE3OTI2MDU4MjAsImV4cCI6MTc5MjYxMzAyMH0.As7tCyWdKcNO7hY1yJCWG00ck2qM2ECC8Q5kbrI7-YA';
 
   private headers = new HttpHeaders({
     'Content-Type': 'application/json',

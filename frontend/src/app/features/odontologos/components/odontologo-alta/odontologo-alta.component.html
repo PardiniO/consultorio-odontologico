@@ -28,7 +28,7 @@
         <input id="es_admin" type="checkbox" [(ngModel)]="doctor.es_admin">
     </div>
     <div class="form__buttons">
-        <button class="form__button" (click)="crear()" [disabled]="doctor.nombre === '' || doctor.apellido === ''">Confirmar</button>
+        <button class="form__button" (click)="crear()" [disabled]="!doctor.nombre || !doctor.apellido || !doctor.usuario || !doctor.contrasena">Confirmar</button>
         <button class="form__button" (click)="salirDelMenuAlta()">Salir</button>
     </div>
 </div>

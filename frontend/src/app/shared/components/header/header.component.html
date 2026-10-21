@@ -1,5 +1,12 @@
 <div class="header">
     <app-home-button></app-home-button>
-    <p> {{ titulo }} </p>
-    <ng-content></ng-content>
+    <div class="patients-slot">
+        <ng-content select="[pacientes]"></ng-content>
+    </div>
+    <div class="doctors-slot">
+        <ng-content select="[doctores]"></ng-content>
+    </div>
+    <div class="turnos-slot">
+        <ng-content select="[turnos]"></ng-content>
+    </div>
 </div>

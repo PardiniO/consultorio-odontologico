@@ -1,16 +1,8 @@
-<div class="content__search-bar">
+<div class="search-bar">
     <div class="busqueda">
-        <input 
-            #searchInput
-            type="text"
-            [placeholder]="placeholderText || 'Buscar...'"
-            (input)="onSearch(searchInput.value)"
-            (keyup.enter)="onSearch(searchInput.value)"
-            class="search-input"/>
-        
+        <input #searchInput type="text" [placeholder]="placeholderText || 'Buscar...'"
+            (keyup.enter)="onSearch(searchInput.value)" (keyup.enter)="onSearch(searchInput.value)" class="search-input" />
+
         <button type="button" (click)="onSearch(searchInput.value)">Buscar</button>
     </div>
-
-    <ng-content></ng-content>
-    
 </div>
