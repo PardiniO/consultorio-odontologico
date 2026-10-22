@@ -1,26 +1,27 @@
 CREATE DATABASE IF NOT EXISTS consultorio;
 USE consultorio;
 
-CREATE TABLE pacientes(
-        id_paciente INT PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE usuarios (
+        id_usuario INT PRIMARY KEY AUTO_INCREMENT,
         nombre VARCHAR(30) NOT NULL,
         apellido VARCHAR(30) NOT NULL,
-        fecha_nacimiento DATE NOT NULL,
-        
         usuario VARCHAR(30) NOT NULL UNIQUE,
         contrasena VARCHAR(255) NOT NULL
 );
 
+CREATE TABLE pacientes(
+        id_paciente INT PRIMARY KEY AUTO_INCREMENT,
+        id_usuario INT NOT NULL UNIQUE,
+        fecha_nacimiento DATE NOT NULL,
+        FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario) ON DELETE CASCADE
+);
+
 CREATE TABLE doctores(
         id_doctor INT PRIMARY KEY AUTO_INCREMENT,
-        nombre VARCHAR(30) NOT NULL,
-        apellido VARCHAR(30) NOT NULL,
+        id_usuario INT NOT NULL UNIQUE,
         rol ENUM('Endodoncista', 'Ortodoncista') NOT NULL,
-        
-        usuario VARCHAR(30) NOT NULL UNIQUE,
-        contrasena VARCHAR(255) NOT NULL,
-        
-        es_admin BOOLEAN NOT NULL
+        es_admin BOOLEAN NOT NULL,
+        FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario) ON DELETE CASCADE
 );
 
 CREATE TABLE turnos(
