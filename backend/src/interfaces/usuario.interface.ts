@@ -1,9 +1,7 @@
-export type Role = "user" | "admin";
-
-export interface IUsuario {
+export interface UsuarioI {
     id?: number,
-    nombre?: string | null,
-    apellido?: string | null,
+    nombre?: string,
+    apellido?: string,
+    username?: string,
     contraseña: string,
-    rol: Role
 }
