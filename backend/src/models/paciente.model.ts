@@ -47,6 +47,7 @@ export const PacienteModel = {
 
     return rows[0] ?? null;
   },
+
 async findByUser(name: string): Promise<Paciente | null> {
     const [rows] = await pool.query<PacienteRow[]>(
       `SELECT
@@ -63,6 +64,7 @@ async findByUser(name: string): Promise<Paciente | null> {
 
     return rows[0] ?? null;
   },
+
   async findWithFilters(
     id_paciente?: number,
     nombre?: string,
@@ -104,7 +106,7 @@ async findByUser(name: string): Promise<Paciente | null> {
     const [result] = await pool.query<ResultSetHeader>(
       `INSERT INTO pacientes
         (nombre, apellido, fecha_nacimiento, usuario, contrasena)
-       VALUES (?, ?, ?, ?, ?)`,
+      VALUES (?, ?, ?, ?, ?)`,
       [
         data.nombre,
         data.apellido,
@@ -123,13 +125,13 @@ async findByUser(name: string): Promise<Paciente | null> {
   async update(id: number, data: PacienteInput): Promise<boolean> {
     const [result] = await pool.query<ResultSetHeader>(
       `UPDATE pacientes
-       SET
+      SET
         nombre = ?,
         apellido = ?,
         fecha_nacimiento = ?,
         usuario = ?,
         contrasena = ?
-       WHERE id_paciente = ?`,
+      WHERE id_paciente = ?`,
       [
         data.nombre,
         data.apellido,

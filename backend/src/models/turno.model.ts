@@ -154,7 +154,7 @@ export const TurnoModel = {
   async update(id: number, data: TurnoInput): Promise<boolean> {
     const [result] = await pool.query<ResultSetHeader>(
       `UPDATE turnos
-       SET
+      SET
         horario = ?,
         sala = ?,
         razon = ?,
@@ -162,7 +162,7 @@ export const TurnoModel = {
         estado = ?,
         id_paciente = ?,
         id_doctor = ?
-       WHERE id_turno = ?`,
+      WHERE id_turno = ?`,
       [
         data.horario,
         data.sala,

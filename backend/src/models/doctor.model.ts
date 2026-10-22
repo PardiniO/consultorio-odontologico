@@ -114,7 +114,7 @@ export const DoctorModel = {
     const [result] = await pool.query<ResultSetHeader>(
       `INSERT INTO doctores
         (nombre, apellido, rol, usuario, contrasena, es_admin)
-       VALUES (?, ?, ?, ?, ?, ?)`,
+      VALUES (?, ?, ?, ?, ?, ?)`,
       [
         data.nombre,
         data.apellido,
@@ -134,14 +134,14 @@ export const DoctorModel = {
   async update(id: number, data: DoctorInput): Promise<boolean> {
     const [result] = await pool.query<ResultSetHeader>(
       `UPDATE doctores
-       SET
+      SET
         nombre = ?,
         apellido = ?,
         rol = ?,
         usuario = ?,
         contrasena = ?,
         es_admin = ?
-       WHERE id_doctor = ?`,
+      WHERE id_doctor = ?`,
       [
         data.nombre,
         data.apellido,
