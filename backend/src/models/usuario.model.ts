@@ -30,6 +30,17 @@ export const UsuarioModel = {
         return result ?? null;
     },
     
+    async findByUsername(termino: string): Promise<UsuarioI | null> {
+        const [rows] = await pool.query<UsuarioRow[]>(`
+            SELECT id_usuario, username, nombre, apellido, contrasena
+            FROM usuarios 
+            WHERE username LIKE ?`, 
+            [termino]
+        );
+
+        return rows[0] ?? null;
+    },
+
     async findWithFilters(
         id?: number,
         nombre?: string,

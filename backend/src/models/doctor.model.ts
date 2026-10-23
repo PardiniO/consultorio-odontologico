@@ -35,16 +35,8 @@ export const DoctorModel = {
 
   async findById(id: number): Promise<Doctor | null> {
     const [rows] = await pool.query<DoctorRow[]>(
-      `SELECT
-        id_doctor,
-        nombre,
-        apellido,
-        rol,
-        usuario,
-        contrasena,
-        es_admin
-      FROM doctores
-      WHERE id_doctor = ?`,
+      `SELECT id_doctor, id_usuario, rol, es_admin
+      FROM doctores WHERE id_usuario = ?`,
       [id]
     );
 
@@ -53,16 +45,9 @@ export const DoctorModel = {
 
   async findByUser(name: string): Promise<Doctor | null> {
     const [rows] = await pool.query<DoctorRow[]>(
-      `SELECT
-        id_doctor,
-        nombre,
-        apellido,
-        rol,
-        usuario,
-        contrasena,
-        es_admin
+      `SELECT id_doctor, rol, es_admin, username
       FROM doctores
-      WHERE usuario = ?`,
+      WHERE username = ?`,
       [name]
     );
 
