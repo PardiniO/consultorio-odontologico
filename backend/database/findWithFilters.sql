@@ -62,7 +62,7 @@ JOIN usuarios u ON d.id_usuario = u.id_usuario
 WHERE
     d.id_doctor = COALESCE(@d_id, d.id_doctor) AND
 	u.nombre = COALESCE(@d_nombre, u.nombre) AND
-    apellido = COALESCE(@d_apellido, u.apellido) AND
+    u.apellido = COALESCE(@d_apellido, u.apellido) AND
     u.username = COALESCE(@d_username, u.username) AND
 	d.rol = COALESCE(@d_rol, d.rol) AND
     d.es_admin = COALESCE(@d_admin, d.es_admin);
