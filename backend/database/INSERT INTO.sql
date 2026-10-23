@@ -1,4 +1,4 @@
-INSERT INTO usuarios (nombre, apellido, username, contraseña)
+INSERT INTO usuarios (nombre, apellido, username, contrasena)
 VALUES
 ('Jaime', 'Capusotto', 'Jcapu', '$2b$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy'),
 ('Juan', 'Fernandez', 'Jfer', '$2b$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy'),
