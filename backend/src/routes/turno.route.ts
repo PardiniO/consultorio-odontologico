@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import * as turnoController from '../controller/turno.controller';
 import verificarToken from '../middleware/verificarToken.middleware';
-import esAdmin from '../middleware/esAdmin.middleware';
+import esAdmin from '../middleware/auth.middleware';
 
 const router = Router();
 
