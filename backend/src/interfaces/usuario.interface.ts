@@ -1,7 +1,7 @@
 import { RowDataPacket } from "mysql2";
 
 export interface UsuarioI {
-    id?: number,
+    id: number,
     nombre?: string,
     apellido?: string,
     username: string,

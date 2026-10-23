@@ -19,7 +19,7 @@ export const UsuarioService = {
         return usuarioCreado;
     },
 
-    async authenticate(username: string, contrasena: string): Promise<Omit<UsuarioInput, 'contrasena'> & { esAdmin: boolean }> {
+    async authenticate(username: string, contrasena: string): Promise<Omit<UsuarioI, 'contrasena'> & { esAdmin: boolean }> {
         const user = await UsuarioModel.findByUsername(username) as UsuarioI | null;
         if (!user) throw new Error("Credenciales inválidas");
         
