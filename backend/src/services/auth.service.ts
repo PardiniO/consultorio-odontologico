@@ -1,6 +1,6 @@
 import jwt, { type SignOptions } from "jsonwebtoken";
 import dotenv from "dotenv";
-import { UsuarioI } from "../interfaces/usuario.interface";
+import { UsuarioI, type UsuarioInput } from "../interfaces/usuario.interface";
 import { UsuarioService } from "./usuario.service";
 
 dotenv.config();
