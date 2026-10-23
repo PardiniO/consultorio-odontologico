@@ -1,5 +1,5 @@
 export interface RespuestaAPI<T> {
-    succes: boolean;
+    success: boolean;
     data?: T;
     message: string;
 }
