@@ -11,10 +11,10 @@ VALUES
 
 INSERT INTO pacientes (id_usuario, fecha_nacimiento)
 VALUES
-(1, 'Perez', '1998-05-12'),
-(2, 'Gonzalez', '2001-09-23'),
-(3, 'Fernandez', '1995-02-17'),
-(4, 'Martinez', '2003-11-08');
+(1, '1998-05-12'),
+(2, '2001-09-23'),
+(3, '1995-02-17'),
+(4, '2003-11-08');
 
 INSERT INTO doctores (id_usuario, rol, es_admin)
 VALUES

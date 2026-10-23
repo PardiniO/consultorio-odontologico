@@ -13,7 +13,7 @@ CREATE TABLE pacientes(
         id_paciente INT PRIMARY KEY AUTO_INCREMENT,
         id_usuario INT NOT NULL UNIQUE,
         fecha_nacimiento DATE NOT NULL,
-        FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario) ON DELETE CASCADE
+        FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
 );
 
 CREATE TABLE doctores(
@@ -21,7 +21,7 @@ CREATE TABLE doctores(
         id_usuario INT NOT NULL UNIQUE,
         rol ENUM('Endodoncista', 'Ortodoncista') NOT NULL,
         es_admin BOOLEAN NOT NULL,
-        FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario) ON DELETE CASCADE
+        FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
 );
 
 CREATE TABLE turnos(
