@@ -16,8 +16,9 @@ export const AuthService = {
 
     async login(username: string, contrasena: string): Promise<{ 
         token: string;
-        user: Omit<UsuarioI, 'contrasena'> } & 
-        { esAdmin: boolean }> {
+        user: Omit<UsuarioI, 'contrasena'>;
+        esAdmin: boolean 
+    }> {
         const user = await UsuarioService.authenticate(username, contrasena);
         if (!user) throw new Error("Usuario no encontrado");
         

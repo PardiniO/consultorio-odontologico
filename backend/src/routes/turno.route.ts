@@ -1,20 +1,20 @@
 import { Router } from 'express';
 import * as turnoController from '../controller/turno.controller';
 import verificarToken from '../middleware/verificarToken.middleware';
-import  { esAdmin } from '../middleware/auth.middleware';
+import  { authGuard, esAdmin } from '../middleware/auth.middleware';
 
 const router = Router();
 
-router.get('/', verificarToken, esAdmin, turnoController.getAll);
+router.get('/', authGuard, esAdmin, turnoController.getAll);
 router.get(
     '/filters',
-    verificarToken,
+    authGuard, 
     esAdmin,
     turnoController.getWithFilters,
 );
-router.get('/:id', verificarToken, esAdmin, turnoController.getById);
+router.get('/:id', authGuard, esAdmin, turnoController.getById);
 router.post('/', turnoController.create);
-router.put('/:id', verificarToken, esAdmin, turnoController.update);
-router.delete('/:id', verificarToken, esAdmin, turnoController.remove);
+router.put('/:id', authGuard, esAdmin, turnoController.update);
+router.delete('/:id', authGuard, esAdmin, turnoController.remove);
 
 export default router;
