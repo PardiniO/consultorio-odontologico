@@ -1,13 +1,12 @@
 import { Router } from "express";
 import * as authController from "../controller/auth.controller";
 import verificarToken from "../middleware/verificarToken.middleware";
-import esAdmin from "../middleware/auth.middleware";
+import { authGuard, esAdmin } from "../middleware/auth.middleware";
+
 
 const router = Router();
 
-router.post('/registrar-doctor', verificarToken, esAdmin, authController.registrarDoctor);
-router.post('/login-doctor', authController.loginDoctor);
-router.post('/registrar-paciente', verificarToken, esAdmin, authController.registrarPaciente);
-router.post('/login-paciente', authController.loginPaciente);
+router.post('/registrar', verificarToken, esAdmin, authController.register);
+router.post('/login', authGuard, authController.login);
 
 export default router;

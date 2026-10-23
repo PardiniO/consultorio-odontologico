@@ -20,7 +20,7 @@ type RequestConUsuario = Request & {
 export function authGuard(req: AuthRequest, res: Response, next: NextFunction) {
     const authHeader = req.headers.authorization;
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
-        res.status(401).json({ message: 'No se ha proporcionado ningún token' });
+        res.status(401).json({ message: 'Token ausente o formato incorrecto' });
         return;
     }
 
@@ -29,18 +29,20 @@ export function authGuard(req: AuthRequest, res: Response, next: NextFunction) {
         const payload = jwt.verify(token, JWT_SECRET) as TokenPayLoad;
         req.user = {
             id: payload.id,
-            username: payload.username
+            username: payload.username,
+            esAdmin: Boolean(payload.esAdmin)
         };
         next();
     } catch {
-        res.status(401).json({ message: 'Token inválido' });
+        res.status(401).json({ message: 'Token inválido o vencido' });
         return;
     }
 }
 
 export function esAdmin(req: RequestConUsuario , res: Response, next: NextFunction) {
-  if (!req.usuario || req.usuario.esAdmin === 0) {
-    return res.status(403).json({ error: 'No tenés permiso para hacer esto' });
+  if (!req.usuario || req.usuario.esAdmin) {
+    res.status(403).json({ error: 'No tenés permiso para hacer esto' });
+    return;
   }
   next();
 }
