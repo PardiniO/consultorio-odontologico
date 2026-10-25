@@ -1,0 +1,24 @@
+Seguí maso todo lo que decía la guía pero:
+
+1- En el Dockerfile del frontend en la última línea después de dist va el nombre del proyecto, ese nombre está en el archivo package.json en el campo "name"
+
+                                        ACAAAAAAAA
+                                            ||
+                                            \/
+    COPY --from=build /app/dist/consultorio-odontologico/browser /usr/share/nginx/html
+
+2- En el backend compile todo a js usando el comando "npx tsc" estando ubicado en la carpeta "backend", PERO PREVIAMENTE HICE ESTO:
+    a - En app.ts en la parte de cors añadí la ruta nueva esa que usa 8080
+    b - Permití la presencia, o como se diga, de las cabeceras de content-type y authorization para el tema token, capaz anda sin esto pero yo no lo voy a probar
+
+3 - Antes de que pregunten por qué hay dos .env, nino, hay dos .env, ya está, eso sí, EL JWT_SECRET DEBE SER EL MISMO EN AMBOS, si no les anda puede ser por eso
+
+4 - Metí un login recontra barato pero por lo menos para safar va, es un servicio en el front y un botón en el nav por si lo quieren pispear
+
+5 - En el compose agregué el campo JWT_SECRET que toma el valor del .env para que quede lindo como los otros
+
+6 - LOS SCRIPTS SQL VAN EN ORDEN, POR ESO TIENEN NUMEROS, y están en una carpeta llamada db
+
+7 - Si me olvide algo sorry pero ya está dockerizado salu2 pedrito y cesar lo logré alfin después de un día renegando
+
++ NOS VEMOS QUE HOY JUEGA EL UNICO GRANDE DEL PAIS CHAU
