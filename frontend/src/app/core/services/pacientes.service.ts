@@ -12,24 +12,27 @@ export class PacientesService {
 
   private http = inject(HttpClient);
 
-  private token: string = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2wiOiJFbmRvZG9uY2lzdGEiLCJlc0FkbWluIjoxLCJpYXQiOjE3OTI2MDU4MjAsImV4cCI6MTc5MjYxMzAyMH0.As7tCyWdKcNO7hY1yJCWG00ck2qM2ECC8Q5kbrI7-YA';
-
-  private headers = new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${this.token}`
-  });
+  private getHeaders(): HttpHeaders {
+    const token: string | null = sessionStorage.getItem('token') || '';
+    const headers = new HttpHeaders ({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+    console.log(headers.get('Authorization'));
+    return headers;
+  }
 
   getAll(): Observable<Paciente[]> {
-    return this.http.get<Paciente[]>(this.apiUrl, { headers: this.headers });
+    return this.http.get<Paciente[]>(this.apiUrl, { headers: this.getHeaders() });
   }
 
   getById(id: number): Observable<Paciente> {
-    return this.http.get<Paciente>(`${this.apiUrl}/${id}`, { headers: this.headers });
+    return this.http.get<Paciente>(`${this.apiUrl}/${id}`, { headers: this.getHeaders() });
   }
 
   getPacientes(searchTerm: string): Observable<Paciente[]> {
     const params = new HttpParams().set('q', searchTerm);
-    return this.http.get<Paciente[]>(this.apiUrl, { headers: this.headers });
+    return this.http.get<Paciente[]>(this.apiUrl, { headers: this.getHeaders() });
   }
 
   getPacientesFiltrados(filtros: FiltroPacientes): Observable<Paciente[]> {
@@ -43,22 +46,22 @@ export class PacientesService {
       }
     });
 
-    return this.http.get<Paciente[]>(`${this.apiUrl}/filters`, { params, headers: this.headers });
+    return this.http.get<Paciente[]>(`${this.apiUrl}/filters`, { params, headers: this.getHeaders() });
   }
 
   getByName(name: string): Observable<Paciente> {
-    return this.http.get<Paciente>(`${this.apiUrl}/by-names/${name}`, { headers: this.headers });
+    return this.http.get<Paciente>(`${this.apiUrl}/by-names/${name}`, { headers: this.getHeaders() });
   }
 
   register(paciente: Omit<Paciente, 'id_paciente'>): Observable<Paciente> {
-    return this.http.post<Paciente>(`${this.apiUrl}/registrar-paciente`, paciente, { headers: this.headers });
+    return this.http.post<Paciente>(`${this.apiUrl}/registrar-paciente`, paciente, { headers: this.getHeaders() });
   }
 
   update(id: number, paciente: Omit<Paciente, 'id_paciente'>): Observable<Paciente> {
-    return this.http.put<Paciente>(`${this.apiUrl}/${id}`, paciente, { headers: this.headers });
+    return this.http.put<Paciente>(`${this.apiUrl}/${id}`, paciente, { headers: this.getHeaders() });
   }
 
   remove(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`, { headers: this.headers });
+    return this.http.delete<void>(`${this.apiUrl}/${id}`, { headers: this.getHeaders() });
   }
 }

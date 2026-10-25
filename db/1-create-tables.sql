@@ -6,7 +6,7 @@ CREATE TABLE pacientes(
         nombre VARCHAR(30) NOT NULL,
         apellido VARCHAR(30) NOT NULL,
         fecha_nacimiento DATE NOT NULL,
-        
+		
         usuario VARCHAR(30) NOT NULL UNIQUE,
         contrasena VARCHAR(255) NOT NULL
 );

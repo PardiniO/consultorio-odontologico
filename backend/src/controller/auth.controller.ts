@@ -59,7 +59,9 @@ export async function loginDoctor(req: Request, res: Response) {
         id: usuarioExiste.id,
         rol: usuarioExiste.rol,
         esAdmin: usuarioExiste.es_admin,
-      })
+    });
+
+    console.log(token);
 
     res.status(200).json({ token });
   } catch (error) {

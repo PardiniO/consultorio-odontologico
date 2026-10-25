@@ -19,4 +19,4 @@ JOIN pacientes ON pacientes.id_paciente = turnos.id_paciente
 JOIN doctores ON doctores.id_doctor = turnos.id_doctor;
 
 SELECT * FROM v_turnos;
-DROP VIEW v_turnos;
+-- DROP VIEW v_turnos;

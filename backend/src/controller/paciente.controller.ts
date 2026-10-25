@@ -15,7 +15,7 @@ function isPacienteInput(body: any): body is PacienteInput {
         typeof body?.nombre === 'string' && body.nombre.trim() !== '' &&
         typeof body?.apellido === 'string' && body.apellido.trim() !== '' &&
         typeof body?.fecha_nacimiento === 'string' && body.fecha_nacimiento.trim() !== '' &&
-                typeof body?.usuario === 'string' && body.usuario.trim() !== '' &&
+        typeof body?.usuario === 'string' && body.usuario.trim() !== '' &&
         typeof body?.contrasena === 'string' && body.contrasena.trim() !== ''
     );
 }
@@ -62,14 +62,12 @@ export const getWithFilters = async (req: Request, res: Response) =>{
     const apellido = req.query.apellido as string | undefined;
     const fecha_nacimiento = req.query.estado as string | undefined;
     const usuario = req.query.usuario as string |  undefined;
-    const contrasena = req.query.contrasena as string | undefined;
 
     const paciente = await PacienteModel.findWithFilters(id_paciente,
     nombre,
     apellido,
     fecha_nacimiento,
-    usuario,
-    contrasena);
+    usuario);
     if (!paciente) {
         return res.status(404).json({ error: 'Paciente no encontrado' });
     }

@@ -9,7 +9,8 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-    origin: 'http://localhost:4200'
+    origin: ['http://localhost:4200', 'http://localhost:8080'],
+    allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 app.get('/health', (_req, res) => {

@@ -1,6 +1,6 @@
 
 import type { RowDataPacket, ResultSetHeader } from 'mysql2/promise';
-import { pool } from '../config/db';
+import { db } from '../config/db';
 
 export interface Doctor {
   id: number;
@@ -13,19 +13,23 @@ export interface Doctor {
 }
 
 export type DoctorInput = Omit<Doctor, 'id'>;
+export type DoctorInfo = Omit<
+  Doctor,
+  | 'id'
+  | 'contrasena'
+>; 
 
 interface DoctorRow extends RowDataPacket, Doctor {}
 
 export const DoctorModel = {
-  async findAll(): Promise<Doctor[]> {
-    const [rows] = await pool.query<DoctorRow[]>(
+  async findAll(): Promise<DoctorInfo[]> {
+    const [rows] = await db.query<DoctorRow[]>(
       `SELECT
         id_doctor,
         nombre,
         apellido,
         rol,
         usuario,
-        contrasena,
         es_admin
       FROM doctores`
     );
@@ -33,15 +37,14 @@ export const DoctorModel = {
     return rows;
   },
 
-  async findById(id: number): Promise<Doctor | null> {
-    const [rows] = await pool.query<DoctorRow[]>(
+  async findById(id: number): Promise<DoctorInfo | null> {
+    const [rows] = await db.query<DoctorRow[]>(
       `SELECT
         id_doctor,
         nombre,
         apellido,
         rol,
         usuario,
-        contrasena,
         es_admin
       FROM doctores
       WHERE id_doctor = ?`,
@@ -52,7 +55,7 @@ export const DoctorModel = {
   },
 
   async findByUser(name: string): Promise<Doctor | null> {
-    const [rows] = await pool.query<DoctorRow[]>(
+    const [rows] = await db.query<DoctorRow[]>(
       `SELECT
         id_doctor,
         nombre,
@@ -75,10 +78,9 @@ export const DoctorModel = {
     apellido?: string,
     rol?: 'Endodoncista' | 'Ortodoncista',
     usuario?: string,
-    contrasena?: string,
     es_admin?: boolean
-  ): Promise<Doctor[]> {
-    const [rows] = await pool.query<DoctorRow[]>(
+  ): Promise<DoctorInfo[]> {
+    const [rows] = await db.query<DoctorRow[]>(
       `SELECT
         id_doctor,
         nombre,
@@ -94,7 +96,6 @@ export const DoctorModel = {
         AND apellido = COALESCE(?, apellido)
         AND rol = COALESCE(?, rol)
         AND usuario = COALESCE(?, usuario)
-        AND contrasena = COALESCE(?, contrasena)
         AND es_admin = COALESCE(?, es_admin)`,
       [
         id_doctor ?? null,
@@ -102,7 +103,6 @@ export const DoctorModel = {
         apellido ?? null,
         rol ?? null,
         usuario ?? null,
-        contrasena ?? null,
         es_admin ?? null
       ]
     );
@@ -111,7 +111,7 @@ export const DoctorModel = {
   },
 
   async create(data: DoctorInput): Promise<Doctor> {
-    const [result] = await pool.query<ResultSetHeader>(
+    const [result] = await db.query<ResultSetHeader>(
       `INSERT INTO doctores
         (nombre, apellido, rol, usuario, contrasena, es_admin)
        VALUES (?, ?, ?, ?, ?, ?)`,
@@ -132,7 +132,7 @@ export const DoctorModel = {
   },
 
   async update(id: number, data: DoctorInput): Promise<boolean> {
-    const [result] = await pool.query<ResultSetHeader>(
+    const [result] = await db.query<ResultSetHeader>(
       `UPDATE doctores
        SET
         nombre = ?,
@@ -157,7 +157,7 @@ export const DoctorModel = {
   },
 
   async remove(id: number): Promise<boolean> {
-    const [result] = await pool.query<ResultSetHeader>(
+    const [result] = await db.query<ResultSetHeader>(
       'DELETE FROM doctores WHERE id_doctor = ?',
       [id]
     );

@@ -1,5 +1,6 @@
 <div class="nav">
-    <button class="nav__button" routerLink="/odontologos">Gestionar doctores</button>
-    <button class="nav__button" routerLink="/turnos">Gestionar turnos</button>
-    <button class="nav__button" routerLink="/pacientes">Gestionar pacientes</button>
+    <button class="nav__button" *ngIf="haIniciadoSesion" routerLink="/odontologos">Gestionar doctores</button>
+    <button class="nav__button" *ngIf="haIniciadoSesion" routerLink="/turnos">Gestionar turnos</button>
+    <button class="nav__button" *ngIf="haIniciadoSesion" routerLink="/pacientes">Gestionar pacientes</button>
+    <button class="nav__button" *ngIf="!haIniciadoSesion" (click)="iniciarSesion()">Iniciar sesión</button>
 </div>

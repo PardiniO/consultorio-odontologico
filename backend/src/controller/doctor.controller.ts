@@ -63,7 +63,6 @@ export const getWithFilters = async (req: Request, res: Response) =>{
     const apellido = req.query.apellido as string | undefined;
     const rol = req.query.rol as 'Endodoncista' | 'Ortodoncista' | undefined;
     const usuario = req.query.usuario as string |  undefined;
-    const contrasena = req.query.contrasena as string | undefined;
     const es_admin =
     req.query.es_admin === 'true' ? true :
     req.query.es_admin === 'false' ? false :
@@ -75,7 +74,6 @@ export const getWithFilters = async (req: Request, res: Response) =>{
         apellido,
         rol,
         usuario,
-        contrasena,
         es_admin
     );
     if (!doctor) {

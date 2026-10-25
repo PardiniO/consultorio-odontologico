@@ -1,13 +1,14 @@
+SELECT * FROM doctores;
 INSERT INTO pacientes 
-(nombre, apellido, fecha_nacimiento)
+(nombre, apellido, fecha_nacimiento, usuario, contrasena)
 VALUES
-('Juan', 'Perez', '1998-05-12'),
-('Maria', 'Gonzalez', '2001-09-23'),
-('Lucas', 'Fernandez', '1995-02-17'),
-('Sofia', 'Martinez', '2003-11-08');
+('Juan', 'Perez', '1998-05-12', 't4','s'),
+('Maria', 'Gonzalez', '2001-09-23', 't2','s'),
+('Lucas', 'Fernandez', '1995-02-17', 't1','s'),
+('Sofia', 'Martinez', '2003-11-08', '5t','s');
 
 INSERT INTO doctores
-(nombre, apellido, rol, usuario, contraseña, es_admin)
+(nombre, apellido, rol, usuario, contrasena, es_admin)
 VALUES
 (
     'Carlos', 'Lopez', 'Endodoncista',
