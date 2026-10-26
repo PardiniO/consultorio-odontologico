@@ -5,7 +5,8 @@ CREATE TABLE usuarios (
         id_usuario INT PRIMARY KEY AUTO_INCREMENT,
         nombre VARCHAR(30) NOT NULL,
         apellido VARCHAR(30) NOT NULL,
-        username VARCHAR(30) NOT NULL UNIQUE,
+        fecha_nacimiento DATE NOT NULL,
+        usuario VARCHAR(30) NOT NULL UNIQUE,
         contrasena VARCHAR(255) NOT NULL
 );
 

@@ -1,6 +1,6 @@
 
 import type { RowDataPacket, ResultSetHeader } from 'mysql2/promise';
-import { pool } from '../config/db';
+import { db } from '../config/db';
 
 export interface Turno {
   id: number;
@@ -34,7 +34,7 @@ interface TurnoRow extends RowDataPacket, Turno {}
 
 export const TurnoModel = {
   async findAll(): Promise<Turno[]> {
-    const [rows] = await pool.query<TurnoRow[]>(
+    const [rows] = await db.query<TurnoRow[]>(
       `SELECT
         id,
         horario,
@@ -57,7 +57,7 @@ export const TurnoModel = {
   },
 
   async findById(id: number): Promise<Turno | null> {
-    const [rows] = await pool.query<TurnoRow[]>(
+    const [rows] = await db.query<TurnoRow[]>(
       `SELECT
         id,
         horario,
@@ -74,7 +74,7 @@ export const TurnoModel = {
         apellido_doctor,
         rol_doctor
       FROM v_turnos
-      WHERE id_turno = ?`,
+      WHERE id = ?`,
       [id]
     );
 
@@ -91,7 +91,7 @@ export const TurnoModel = {
     id_paciente?: number,
     id_doctor?: number
   ): Promise<Turno[]> {
-    const [rows] = await pool.query<TurnoRow[]>(
+    const [rows] = await db.query<TurnoRow[]>(
       `SELECT
         id,
         horario,
@@ -133,10 +133,10 @@ export const TurnoModel = {
   },
 
   async create(data: TurnoInput): Promise<Turno | null> {
-    const [result] = await pool.query<ResultSetHeader>(
+    const [result] = await db.query<ResultSetHeader>(
       `INSERT INTO turnos
         (horario, sala, razon, descripcion, estado, id_paciente, id_doctor)
-      VALUES (?, ?, ?, ?, ?, ?, ?)`,
+       VALUES (?, ?, ?, ?, ?, ?, ?)`,
       [
         data.horario,
         data.sala,
@@ -152,7 +152,7 @@ export const TurnoModel = {
   },
 
   async update(id: number, data: TurnoInput): Promise<boolean> {
-    const [result] = await pool.query<ResultSetHeader>(
+    const [result] = await db.query<ResultSetHeader>(
       `UPDATE turnos
        SET
         horario = ?,
@@ -179,7 +179,7 @@ export const TurnoModel = {
   },
 
   async remove(id: number): Promise<boolean> {
-    const [result] = await pool.query<ResultSetHeader>(
+    const [result] = await db.query<ResultSetHeader>(
       'DELETE FROM turnos WHERE id_turno = ?',
       [id]
     );

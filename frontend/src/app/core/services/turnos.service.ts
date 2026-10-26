@@ -12,36 +12,39 @@ export class TurnosService {
 
   private http = inject(HttpClient);
 
-  private token: string = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2wiOiJFbmRvZG9uY2lzdGEiLCJlc0FkbWluIjoxLCJpYXQiOjE3OTI2MDU4MjAsImV4cCI6MTc5MjYxMzAyMH0.As7tCyWdKcNO7hY1yJCWG00ck2qM2ECC8Q5kbrI7-YA';
-
-  private headers = new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${this.token}`
-  });
+  private getHeaders(): HttpHeaders {
+    const token: string | null = sessionStorage.getItem('token') || '';
+    const headers = new HttpHeaders ({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    });
+    console.log(headers.get('Authorization'));
+    return headers;
+  }
 
   getAll(): Observable<Turno[]> {
-    return this.http.get<Turno[]>(this.apiUrl, { headers: this.headers });
+    return this.http.get<Turno[]>(this.apiUrl, { headers: this.getHeaders() });
   }
 
   getById(id: number): Observable<Turno> {
-    return this.http.get<Turno>(`${this.apiUrl}/${id}`, { headers: this.headers });
+    return this.http.get<Turno>(`${this.apiUrl}/${id}`, { headers: this.getHeaders() });
   }
 
   create(turno: Omit<Turno, 'id'>): Observable<Turno> {
-    return this.http.post<Turno>(this.apiUrl, turno, { headers: this.headers });
+    return this.http.post<Turno>(this.apiUrl, turno, { headers: this.getHeaders() });
   }
 
   update(id: number, turno: Omit<Turno, 'id'>): Observable<Turno> {
-    return this.http.put<Turno>(`${this.apiUrl}/${id}`, turno, { headers: this.headers });
+    return this.http.put<Turno>(`${this.apiUrl}/${id}`, turno, { headers: this.getHeaders() });
   }
 
   remove(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`, { headers: this.headers });
+    return this.http.delete<void>(`${this.apiUrl}/${id}`, { headers: this.getHeaders() });
   }
     
   getTurnos(searchTerm: string): Observable<string[]> {
     const params = new HttpParams().set('q', searchTerm);
-    return this.http.get<string[]>(this.apiUrl, { headers: this.headers });
+    return this.http.get<string[]>(this.apiUrl, { headers: this.getHeaders() });
   }
 
   getTurnosFiltrados(filtros: FiltroTurnos): Observable<Turno[]> {
@@ -55,6 +58,6 @@ export class TurnosService {
       }
     });
 
-    return this.http.get<Turno[]>(`${this.apiUrl}/filters`, { params, headers: this.headers });
+    return this.http.get<Turno[]>(`${this.apiUrl}/filters`, { params, headers: this.getHeaders() });
   }
 }
